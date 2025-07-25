@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block title %}orders{% endblock title %}
+
+{% block content %}
+{% if orders %}
+{% for order in orders %}
+<div>{{order}}
+	<p>status: {{order.status}}</p>
+</div>
+{% endfor %}
+{% else %}
+<div>No orders are availble </div>
+{% endif %}
+{% endblock content %}

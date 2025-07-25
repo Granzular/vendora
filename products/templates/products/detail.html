@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div> 
+	<h3>{{ product.name }}</h3>
+	<p>{{ product.description}}</p>
+
+	<img style="width:100px;height:100px;" src="{{product.image.url}}">
+	<p>₦{{product.price}}</p><button>add to cart</button>	
+
+</div>
+{% endblock content %}

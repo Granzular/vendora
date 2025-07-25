@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block title %}{% endblock %}
+
+{% block content %}
+
+<section>
+	{% if products %}
+	{% for product in products %}
+	<a href="{{product.get_absolute_url}}">
+	<div>
+		<h3>{{ product.name }}</h3>
+		<p>{{ product.description|truncatewords:10}}</p>
+		<img style="width:100px;height:100px;" src="{{product.image.url}}">
+		<p>₦{{product.price}}</p><button>add to cart</button>
+	</div>
+	</a>
+	{% endfor %}
+	{% else %}
+	<div> No product Available </div>
+	{% endif %}
+</section>
+{% endblock content %}

@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}signup{% endblock title %}
+
+{% block content %}
+<form method="POST" action="" id='signup_form' >
+	<h2>SignUp</h2>
+
+	{% if error %}
+	{{error}}
+	{% endif %}
+
+	{% csrf_token %}
+	
+	<p id="error_msg_box"></p>
+	{{signupform }}
+
+	<button type="submit" id="signup_button">Signup</button> 
+
+	<p> already have an account?</p>
+	<a href="{% url 'customers:login' %}" >login</a>
+</form>
+{% endblock content %}
+
+{% block scripts %}
+<script  src="{% static 'customers/js/confirm_password.js' %}"><script>
+{% endblock scripts %}

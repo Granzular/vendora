@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block title %}product categories{% endblock %}
+
+{% block content %}
+{% if category_list %}
+{% for category in category_list %}
+<ul>
+	<li>{{category}}</li>
+</ul>
+{% endfor %}
+{% else %}
+<div>No Available Categories </div>
+{% endif %}
+{% endblock content %}
