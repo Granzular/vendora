@@ -5,8 +5,13 @@
 {% block content %}
 {% if orders %}
 {% for order in orders %}
-<div>{{order}}
+
+<div>Order no: {{order.order_id}}
+	{% for pos in order.positions.all %}
+	<p>item:  {{pos.product.name}} quantity: {{pos.quantity}}  </p>
+	{% endfor %}
 	<p>status: {{order.status}}</p>
+	<a href="{{order.get_absolute_url}}">view order</a>
 </div>
 {% endfor %}
 {% else %}

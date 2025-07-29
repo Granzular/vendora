@@ -123,7 +123,8 @@ STATICFILES_DIRS = [
         BASE_DIR / 'static',
         ]
 
-STATIC_ROOT = BASE_DIR / '../staticfiles'
+STATIC_ROOT = BASE_DIR / '../staticfiles' # Point this to the preferred directory. Currently points upward from the BASE_DIR
+
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 

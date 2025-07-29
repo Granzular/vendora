@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block title %}orders{% endblock title %}
+
+{% block content %}
+{% if order %}
+
+<div><p>Order no: {{order.order_id}}</p>
+	{% for pos in order.positions.all %}
+	<img style="width:100px;height:100px;" src="{{pos.product.image.url}}" alt="{{pos.product.name}}">
+	<p>item:  {{pos.product.name}} quantity: {{pos.quantity}}  </p>
+	<a href="{{pos.product.get_absolute_url}}">view product here</a>
+	{% endfor %}
+	<p>status: {{order.status}}</p>
+	
+</div>
+
+{% else %}
+<div>Order Not found</div>
+{% endif %}
+{% endblock content %}

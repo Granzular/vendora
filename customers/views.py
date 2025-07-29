@@ -56,7 +56,7 @@ class LoginView(View):
                 next_url = request.GET.get("next")
                 if next_url:
                     try:
-                        resolve(urlparse(next_url.path))
+                        resolve(urlparse(next_url).path)
                         return redirect(next_url)
                     except Resolver404:
                         return redirect(reverse("store:index"))

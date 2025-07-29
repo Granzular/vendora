@@ -1,7 +1,7 @@
 from django.db import models
 from products.models import Product
 from customers.models import Customer
-
+from django.shortcuts import reverse
 
 class Position(models.Model):
     product = models.ForeignKey(Product,on_delete=models.CASCADE)
@@ -18,12 +18,13 @@ class Position(models.Model):
 
 
 
-class Cart(models.Model):
+class Order(models.Model):
     STATUS_CHOICES = (
             ('in_progress','in_progress'),
             ('delivered','delivered'),
             ('cancelled','cancelled'),
             )
+    order_id = models.CharField(max_length=32,null=True,blank=True)
     positions = models.ManyToManyField(Position)
     total_price = models.IntegerField(blank=True,null=True)
     customer = models.ForeignKey(Customer,on_delete=models.CASCADE)
@@ -34,4 +35,9 @@ class Cart(models.Model):
     """
 
     def __str__(self):
+
         return f"Cart {self.customer.user.username}|{self.status}"
+
+    def get_absolute_url(self):
+
+        return reverse("orders:detail",kwargs={"pk":self.id})

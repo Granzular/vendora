@@ -25,6 +25,18 @@ class Product(models.Model):
     def get_absolute_url(self):
         return reverse("products:detail", kwargs={"pk":self.id})
 
+    def get_rating(self):
+        reviews = self.review_set.all()
+        if len(reviews)==0:
+            return None
+        else:
+            rating = sum([x.rating for x in reviews])/len(reviews)
+            return rating
+
+    def get_quantity_in_inventory(self):
+        quantity = None if len(self.inventory_set.all())==0 else self.inventory_set.all()[0].quantity
+
+        return quantity
 
 
     class Meta:
@@ -36,8 +48,12 @@ class Category(models.Model):
     def __str__(self):
         return self.name
 
+    def get_absolute_url(self):
+        return reverse("products:category_products",kwargs={"category_name":self.name})
+
     class Meta:
         verbose_name_plural = "Categories"
+
 
 
 class Inventory(models.Model):
@@ -56,3 +72,4 @@ class Review(models.Model):
     rating = models.IntegerField(validators=[MaxValueValidator(5)],default=5)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
+
