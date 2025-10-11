@@ -1,0 +1,57 @@
+/* General product section and card rule*/
+.product-section{
+  box-sizing: border-box;
+  width: 100%;
+  margin: 0;
+  /*border: solid red 1px;*/
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  background-color: #eee;
+ }
+.product-card{
+  width: 6em;
+  height: 8em;
+  margin: 6px;
+  background-color: #fff;
+}
+.product-card img{
+  width: 100%;
+  height: 60%;
+  border-radius: 2.5px;
+}
+.product-name{
+  /*border: solid red;*/
+  padding: 0px 3px 0px 3px;
+  font-size: 12px;
+}
+.product-price{
+  /*border: solid blue;*/
+  margin-top: -10px;
+  padding: 0px 3px 0px 3px;
+}
+.product-link{
+  text-decoration: none;
+  color: #333;
+}
+
+/* featured products rule, overrides some generic rules
+#featured .product-card{
+  width: 6em;
+  height: 8em;
+  border: groove 1px;
+  margin: 6px;
+}
+
+#featured .product-section{
+  box-sizing: border-box;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  border: solid red 1px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+ }*/

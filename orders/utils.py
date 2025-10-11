@@ -1,9 +1,10 @@
-from .models import Order
+from .models import Order, Cart, CartPosition
 from customers.models import Customer
-
+from products.utils import get_product_by_id
+from django.db.utils import IntegrityError
 def get_orders_list_by_user(status,user):
     """
-    returns a dict that contains a the cart object that can be accessed with 'response' key. check for 'error' key fir errors
+    returns a dict that contains a the cart object that can be accessed with 'response' key. check for 'error' key for errors
     """
     
     try:
@@ -12,6 +13,9 @@ def get_orders_list_by_user(status,user):
             order = Order.objects.filter(customer=customer)
         else:
             order = Order.objects.filter(customer=customer,status=status)
+        if len(order) == 0:
+            order = None
+        
 
         return {"response":order}
     
@@ -27,4 +31,45 @@ def get_order_by_user(pk,user):
 
     except Order.DoesNotExist as err:
         return None
+def get_cart_by_user(user):
+    
+    try:
+        customer = Customer.objects.get(user=user)
+        cart = Cart.objects.get(customer=customer,status="active")
+        return {"response":cart}
+    
+    except Customer.DoesNotExist as err:
+        return {"error":err}
 
+    except Cart.DoesNotExist:
+        cart = Cart.objects.create(customer=customer,status="active")
+        return {"response":cart}
+
+def add_to_cart(user,data):
+
+    cart = get_cart_by_user(user)["response"]
+    product = get_product_by_id(data["product"])
+    quantity = data["quantity"]
+    try:
+        CartPosition.objects.create(cart=cart,product=product,quantity=quantity)
+    except IntegrityError:
+        cart_item = CartPosition.objects.get(cart=cart,product=product)
+        cart_item.quantity += 1
+        cart_item.save()
+
+    return True
+
+def remove_from_cart(user,pk,update=False):
+    cart = get_cart_by_user(user)["response"]
+    cart_item = CartPosition.objects.get(cart=cart,id=pk)
+    if update:
+        cart_item.quantity -= 1
+        if cart_item.quantity == 0:
+            cart_item.delete()
+            
+        else:
+            cart_item.save()
+    else:
+        cart_item.delete()
+    return cart_item.quantity or None
+ 

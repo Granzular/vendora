@@ -1,0 +1,150 @@
+header{
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background-color: rgba(10,20,120,0.4);
+  z-index: 2000;
+}
+#head{
+  background-color: rgba(0,0,0,0.2);
+}
+.cont{
+  width: 100%;
+  margin: auto;
+  overflow: hidden;
+}
+
+#brand-name{
+  margin-left: 10px;
+  color: #fff;
+  font-family: courier;
+  float: left;
+  width: 30%;
+}
+#page-name{
+  /* change identifier to class*/
+  font-family: serif;
+  font-size: 5rem;
+  text-align: center;
+  color: bisque;
+  margin-bottom: 0;
+}
+.navbar{
+  color: #333;
+  float: right;
+  width: 60%;
+}
+.navbar ul{
+  font-family: courier;
+  font-weight: bold;
+  list-style: none;
+  float:  left;
+}
+ 
+
+.navbar ul li{
+  display: inline-block;
+}
+.navbar ul li a{
+  text-decoration: none;
+  color: #fff;
+  font-size: 20px;
+  padding-right: 15px;
+}
+.active-link{
+  color: lightblue;
+}
+.shot, .menuicon{
+  border-radius: 50%;
+  border-style: none;
+  border-width: 1px;
+  border-color: #fff;
+  width: 40px;
+  height: 40px;
+  color: #fff;
+  padding: 5px;
+  margin: 5px;
+}
+.shot-cont{
+  float: right;
+}
+.shot:hover{
+  width: 44px;
+  height: 44px;
+}
+.shot-link{
+  text-decoration: none;
+}
+.menuicon{
+  display: none;
+}
+
+.notification-dot{
+    position: relative;
+    top:-20px;
+    left:-12px;
+    display: none;
+    border-radius: 50%;
+    width: 10px;
+    height: 10px;
+    background-color: red;
+    padding: 2px;
+    font-size: 10px;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+  }
+@media screen and (max-width:600px){
+    .navbar ul{
+      font-weight: bold;
+      position: fixed;
+      top: 8vh;
+      left:0;
+      height: 100vh;
+      display: none;
+      list-style: none;
+      background-color: #fff;
+      border-style: none;
+      border-radius: 2.5px;
+      border-left: none;
+      box-shadow: 0 0 5px 2px #888;
+      opacity: 95%;
+      z-index: 3000;
+      animation-name: slide;
+      animation-duration: 0.5s;
+      animation-iteration-count: 1;
+      animation-fill-mode: forwards;
+}
+  @keyframes slide{
+    from{
+      width: 0%;
+    }
+    to{
+      width: 40%; 
+    }
+  }
+.navbar ul li{
+  display: block;
+  padding: 10px;
+}
+.navbar ul li a{
+  text-decoration: none;
+  color: rgba(10,20,120,0.6);
+  font-size: 20px;
+}
+  #brand-name{
+  font-size: 20px;
+}
+  .shot, .menuicon{
+    width:20px;
+    height: 20px;
+  }
+  .shot:hover{
+  width: 24px;
+  height: 24px;
+}
+  .menuicon{
+    display: inline-block;
+  }
+}
+

@@ -1,0 +1,11 @@
+#banner{
+  min-height: 25vh;
+}
+main{
+  padding-top: 35vh;
+}
+@media screen and (max-width:600px){
+  main{
+    padding-top: 40vh;
+  }
+}

@@ -6,13 +6,18 @@
 {% if order %}
 
 <div><p>Order no: {{order.order_id}}</p>
-	{% for pos in order.positions.all %}
-	<img style="width:100px;height:100px;" src="{{pos.product.image.url}}" alt="{{pos.product.name}}">
-	<p>item:  {{pos.product.name}} quantity: {{pos.quantity}}  </p>
-	<a href="{{pos.product.get_absolute_url}}">view product here</a>
-	{% endfor %}
 	<p>status: {{order.status}}</p>
-	
+	<p>cost: ₦{{order.get_formatted_total_price}} </p>
+	<p>ordered on: {{order.get_formatted_created}} </p>
+	{% for pos in order.positions.all %}
+	<div>
+	<img style="width:100px;height:100px;" src="{{pos.product.image.url}}" alt="{{pos.product.name}}">
+	<p>item:  {{pos.product.name}}</p>
+	<p>quantity: {{pos.quantity}}  </p>
+	<a href="{{pos.product.get_absolute_url}}">view product here</a>
+	</div>
+	{% endfor %}
+		
 </div>
 
 {% else %}

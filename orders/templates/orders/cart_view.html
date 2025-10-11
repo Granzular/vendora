@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% load static humanize %}
+
+{% block title %}cart_view{% endblock title %}
+{% block styles %}
+<link rel="stylesheet" href="{% static 'orders/css/cart.css' %}">
+{% endblock styles %}
+{% block content %}
+<main>
+   <div class="cart-section">
+     
+{% if empty %}
+<div class="alert alert-warning">
+  <strong> Your Cart is currently Empty!</strong>
+  <a href="/" class="btn btn-primary-outline">Explore new products</a>
+</div>
+{% else %}
+{% for item in cart.positions.all %}
+     <div class="cart-cont">
+<div class="cart-card">
+                <img src="{{item.product.image.url}}">
+                 <strong class="cartitem-name">{{ item.product.name }}</strong>             
+		<strong class="cartitem-price">₦{{item.product.price|intcomma}}</strong>
+</div>
+     <div class="cart-info">
+       <p><b>Sub Total: </b>₦{{item.total_price|intcomma}}</p>
+       <p><b>Quantity: </b>{{item.quantity}}</p>
+  <button class="plus-cartitem-btn ctb" id="add-{{item.product.id}}">+</button>
+  <button class="minus-cartitem-btn ctb" id="remove-{{item.product.id}}">-</button>
+       <button class="trash" id="delete-{{item.product.id}}"></button>
+     </div>
+     </div>    
+{% endfor %}
+     <p><b>Total: ₦{{cart.total_price|intcomma}}</b></p>
+     
+  <button id="checkout-btn">Checkout</button>
+{% endif %}
+  </div>
+</main>
+{% endblock content %}

@@ -9,7 +9,7 @@
 	<img style="width:100px;height:100px;" src="{{product.image.url}}">
 	<p>Rating: {% if product.get_rating %}{{ product.get_rating }}{% else %} No ratings {% endif %} </p>
 	<p>units left: {{product.get_quantity_in_inventory}} </p>
-	<p>₦{{product.price}}</p><button>add to cart</button>	
+	<p>₦{{product.price}}</p><button class="add-to-cart-btn" id="{{product.id}}" >add to cart</button>	
 
 </div>
 <div>

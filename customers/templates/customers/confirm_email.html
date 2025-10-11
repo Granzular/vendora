@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block title %}confirm email{% endblock title %}
+
+{% block content %}
+
+<form >
+	{% csrf_token %}
+	<h2> Confirm Email </h2>
+	<input type="text" name="otp" maxlength="6">
+	<button type="submit">Confirm</button>
+
+</form>
+{% endblock content %}
+
+
+

@@ -1,15 +1,18 @@
-{% if products %} 
+<section class="product-section">
+{% if products %}
 {% for product in products %}
 
-        <a href="{{product.get_absolute_url}}">
-        <div>
-                <h3>{{ product.name }}</h3>
-                <p>{{ product.description|truncatewords:10}}</p>
-                <img style="width:100px;height:100px;" src="{{product.image.url}}">
-		<p>₦{{product.price}}</p><button>add to cart</button>
+                  <a href="{{product.get_absolute_url}}" class="product-link">  
+<div class="product-card">             
+                <img src="{{product.image.url}}" loading="lazy">
+                 
+<strong class="product-name">{{ product.name|truncatechars:10 }}</strong>
+		<p class="product-price">₦{{product.price}}</p>
+                
         </div>
-        </a>
+                  </a>                         
         {% endfor %}
         {% else %}
         <div> No product Available </div>
         {% endif %}
+</section>

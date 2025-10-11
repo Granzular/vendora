@@ -1,11 +1,52 @@
 {% extends 'base.html' %}
-
+{% load static humanize %}
 {% block title %}{% endblock %}
-
+{% block styles %}
+<link rel="stylesheet" href="{% static 'store/css/index.css' %}">
+{% endblock styles %}
+{% block scripts %}
+<script type="text/javascript"  src="{% static 'store/js/index.js'%}"></script>
+{% endblock scripts %}
 {% block content %}
-
-<section>
-	{% include "products/partials/product_list.html" %}
-	<!-- context dictionaries are used in the above partial. add appropriate classes for styling -->
+<main>
+	<h2>Featured Products</h2>
+	<section class="product-section" id="featured">
+{% if featured %}
+{% for product in featured %}
+	             <a href="{{product.get_absolute_url}}" class="product-link">  
+<div class="product-card">                     
+                <img src="{{product.image.url}}" loading="lazy">
+                
+<strong class="product-name">{{ product.name|truncatechars:10 }}</strong>
+		<p class="product-price">₦{{product.price|intcomma}}</p>
+                
+        </div>
+	        </a>
+        {% endfor %}
+        {% else %}
+        <div> No product Available </div>
+        {% endif %}
 </section>
+        
+        <br>
+        <h2>Explore</h2>
+        <section class="product-section">
+{% if products %}
+{% for product in products %}
+ <a href="{{product.get_absolute_url}}" class="product-link">  
+<div class="product-card">      
+                <img src="{{product.image.url}}" loading="lazy">
+                 
+<strong class="product-name">{{ product.name|truncatechars:10 }}</strong>
+		<p class="product-price">₦{{product.price|intcomma}}</p>
+                
+        </div>
+ </a>
+        {% endfor %}
+        {% else %}
+        <div> No product Available </div>
+        {% endif %}
+</section>
+
+</main>
 {% endblock content %}

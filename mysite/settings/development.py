@@ -6,9 +6,17 @@ SECRET_KEY = 'django-insecure-1fop@ih@55$%ehzh=^+uyqnp-%a0=v5i3)=uivaxd=gj+_yhaq
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
 
 
+STATIC_URL = '/static/'
+STATICFILES_DIRS = [
+        BASE_DIR / 'static',
+        ]
+STATIC_ROOT = BASE_DIR / '../staticfiles'
+# Point this to the preferred directory. Currentlypoints upward from the BASE_DIR
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR / 'media'
 
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases

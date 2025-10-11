@@ -1,5 +1,7 @@
 from django.contrib import admin
-from .models import Position, Order
+from .models import OrderPosition, Order,Cart, CartPosition
 
-admin.site.register(Position)
+admin.site.register(OrderPosition)
 admin.site.register(Order)
+admin.site.register(Cart)
+admin.site.register(CartPosition)
