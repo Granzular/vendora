@@ -16,22 +16,22 @@
 </div>
 {% else %}
 {% for item in cart.positions.all %}
-     <div class="cart-cont">
+     <div id="cart-{{item.product.id}}"class="cart-cont">
 <div class="cart-card">
                 <img src="{{item.product.image.url}}">
                  <strong class="cartitem-name">{{ item.product.name }}</strong>             
-		<strong class="cartitem-price">₦{{item.product.price|intcomma}}</strong>
+		<strong class="cartitem-price" id="cartitem-price-{{item.product.id}}">₦{{item.product.price|intcomma}}</strong>
 </div>
      <div class="cart-info">
-       <p><b>Sub Total: </b>₦{{item.total_price|intcomma}}</p>
-       <p><b>Quantity: </b>{{item.quantity}}</p>
+       <p><b>Sub Total: </b><span id="cart-subtotal-{{item.product.id}}">₦{{item.total_price|intcomma}}</span></p>
+       <p><b>Quantity: </b><span id="quantity-{{item.product.id}}">{{item.quantity}}</span></p>
   <button class="plus-cartitem-btn ctb" id="add-{{item.product.id}}">+</button>
   <button class="minus-cartitem-btn ctb" id="remove-{{item.product.id}}">-</button>
        <button class="trash" id="delete-{{item.product.id}}"></button>
      </div>
      </div>    
 {% endfor %}
-     <p><b>Total: ₦{{cart.total_price|intcomma}}</b></p>
+     <p><b>Total: <span id="cart-total-price" >₦{{cart.total_price|intcomma}}</span></b></p>
      
   <button id="checkout-btn">Checkout</button>
 {% endif %}

@@ -12,5 +12,9 @@ urlpatterns = [
 ## DRF APIs View
 urlpatterns += [
         path("api/cart/",api.CartView.as_view(),name="api-cart-view"),
-        path("api/cart/<int:pk>",api.CartView.as_view(),name="api-cart-patch-put-delete")
+        path("api/cart/<int:pk>",api.CartView.as_view(),name="api-cart-patch-put-delete"),
+
+        path("api/cart/bulk-create/",api.bulk_create_cart,name="bulk-cart-create"),
+        path("api/cart/bulk-update/",api.bulk_update_cart,name="bulk-cart-update"),
+        path("api/cart/bulk-delete/",api.bulk_delete_cart,name="bulk-cart-delete"),
         ]

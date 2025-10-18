@@ -38,8 +38,17 @@ def cart_view(request):
     if request.method == "GET":
         if request.headers.get("X-Requested-With")=="XMLHttpRequest":
             cart = get_cart_by_user(request.user)["response"]
-            context = serializers.serialize("json",[cart])
-            return HttpResponse(context,content_type="application/json")
+            context = {
+                    "totalCartPrice" : cart.total_price(),
+                    "cartCount" : len(cart.positions.all()),
+                    "cartItems" :[],
+                    "cart" : []
+                    }
+            for item in  cart.positions.all():
+                context["cartItems"].append({"price":item.product.price,"subTotal":item.total_price(),"product":item.product.id,"quantity":item.quantity})
+            for item in cart.positions.all():
+                context["cart"].append({"product":item.product.id,"quantity":item.quantity})
+            return JsonResponse(context)
         else:
             cart = get_cart_by_user(request.user)["response"]
             empty = True if len(cart.positions.all())<=0 else False

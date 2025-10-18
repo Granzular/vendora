@@ -8,6 +8,9 @@ from django.utils.decorators import method_decorator
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import csrf_exempt
 from django.shortcuts import get_object_or_404
+from rest_framework.decorators import api_view
+from django.db import transaction
+
 
 @method_decorator(csrf_exempt,name="dispatch")
 class CartView(APIView):
@@ -45,3 +48,71 @@ class CartView(APIView):
         cart = get_object_or_404(Cart,pk=pk)
         cart.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
+
+
+# BULK OPERATIONS BELOW
+
+@api_view(['POST'])
+@transaction.atomic
+def bulk_create_cart(request):
+    """
+    Create multiple cart items at once.
+    Expects a list of objects.
+    """
+    if not isinstance(request.data, list):
+        return Response({"error": "Expected a list of objects"}, status=status.HTTP_400_BAD_REQUEST)
+
+    serializer = CartPositionSerializer(data=request.data, many=True)
+    serializer.is_valid(raise_exception=True)
+    serializer.save(cart=get_cart_by_user(
+request.user)["response"])
+    return Response(serializer.data, status=status.HTTP_201_CREATED)
+
+
+
+@api_view(['PUT', 'PATCH'])
+@transaction.atomic
+def bulk_update_cart(request):
+    """
+    Update multiple cart items.
+    Each object must contain an 'id' field.
+    """
+    if not isinstance(request.data, list):
+        return Response({"error": "Expected a list of objects"}, status=status.HTTP_400_BAD_REQUEST)
+ 
+    updated_items = []
+    for item in request.data:
+        obj_id = item.get('product')
+        if not obj_id:
+            continue  # Skip objects without an ID
+
+        try:
+            instance = CartPosition.objects.get(product=obj_id)
+        except CartPosition.DoesNotExist:
+            
+            continue
+        
+        serializer = CartPositionSerializer(instance, data=item, partial=True)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        updated_items.append(serializer.data)
+
+    return Response(updated_items, status=status.HTTP_200_OK)
+
+
+
+@api_view(['DELETE'])
+@transaction.atomic
+def bulk_delete_cart(request):
+    """
+    Delete multiple cart items by IDs.
+    Expects {"ids": [1, 2, 3]}.
+    """
+    ids = request.data.get("ids", [])
+    if not isinstance(ids, list):
+        return Response({"error": "ids must be a list"}, status=status.HTTP_400_BAD_REQUEST)
+
+    qs = CartPosition.objects.filter(product__in=ids)
+    count = qs.count()
+    qs.delete()
+    return Response({"deleted": count}, status=status.HTTP_200_OK)
