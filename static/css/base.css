@@ -11,6 +11,15 @@ body{
   overflow: hidden;
   border: solid 1px #fff;
 }
+#search-results-section{
+  width: 80%;
+  margin: auto;
+}
+.search-result{
+  width:80%;
+  margin: auto;
+  border-radius: 5px;
+}
 main{
   margin: 10px;
   padding-top: 20vh;
@@ -19,6 +28,7 @@ footer{
   width: 100%;
   min-height: 20vh; 
   margin: auto;
+  margin-top: 100px;
   overflow: hidden;
   background-color: #333;
 }

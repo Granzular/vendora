@@ -1,0 +1,27 @@
+h2{
+  text-align: center;
+  font-size: 32px;
+  text-shadow: 0 0 2px #ccc;
+}
+.category-list{
+  
+}
+.category-list a{
+  margin: auto;
+  text-decoration: none;
+  color: #fff;
+}
+.category-list ul{
+  margin-top: 20px;
+}
+.category-list li{
+  display: inline-flex;
+  min-width: 100px;
+  height: 32px;
+  line-height: 32px;
+  list-style-type: none;
+  border-style: none;
+  border-radius: 15px;
+  background-color: darkslateblue;
+}
+

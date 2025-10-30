@@ -1,20 +1,28 @@
 {% extends "base.html" %}
-
+{% load static humanize %}
 {% block title %}orders{% endblock title %}
-
+{% block styles %}
+<link rel="stylesheet" href="{% static 'orders/css/orders.css' %}">
+{% endblock styles %}
 {% block content %}
+<main>
 {% if order %}
 
-<div><p>Order no: {{order.order_id}}</p>
-	<p>status: {{order.status}}</p>
-	<p>cost: ₦{{order.get_formatted_total_price}} </p>
+<div class="kard">
+	<strong>THIS IS A REMINDER, MAKE THIS PAGE AN ACTION PAGE TO MANAGE THE GIVEN ORDER</strong>
+	<p class="label">Order id</p>
+	<p>{{order.order_id}}</p>
+	<p class="label">Status</p>
+	<p>{{order.status}}</p>
+	<p class="label">Total Price</p>
+	<p>₦{{order.get_formatted_total_price}} </p>
 	<p>ordered on: {{order.get_formatted_created}} </p>
 	{% for pos in order.positions.all %}
-	<div>
+	<div class="kard">
 	<img style="width:100px;height:100px;" src="{{pos.product.image.url}}" alt="{{pos.product.name}}">
 	<p>item:  {{pos.product.name}}</p>
 	<p>quantity: {{pos.quantity}}  </p>
-	<a href="{{pos.product.get_absolute_url}}">view product here</a>
+	<a class="a-btn" href="{{pos.product.get_absolute_url}}">view product here</a>
 	</div>
 	{% endfor %}
 		
@@ -23,4 +31,6 @@
 {% else %}
 <div>Order Not found</div>
 {% endif %}
+	
+</main>
 {% endblock content %}

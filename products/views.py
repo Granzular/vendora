@@ -2,6 +2,8 @@ from django.shortcuts import render
 from .models import Product,Category
 from django.views.generic import ListView
 from .utils import get_product_reviews, get_products_by_category
+from django.http import JsonResponse
+import base64
 
 def detailView(request,pk):
     product = Product.objects.get(id=pk)
@@ -27,3 +29,14 @@ def category_products_view(request,category_name):
             }
     """This view renders a template that uses a template partial, so the key "products" and any other key must be cobsistent"""
     return render(request,"products/category_products.html",context)
+
+def search_view(request):
+
+    q = request.GET.get("q")
+    res = Product.objects.filter(name__contains=q) if bool(q.strip()) else []
+
+    res = [{'name':x.name,'url':x.get_absolute_url(),'image':f"data:media/jpeg;bas64,{base64.b64encode(x.image.read()).decode()}"} for x in res] if len(res)>0 else {"empty":f"no result matching the query '{q}' was found"}
+
+    result = {
+            "result" : res }
+    return JsonResponse(result)

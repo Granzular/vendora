@@ -1,18 +1,27 @@
 {% extends "base.html" %}
+{% load static humanize %}
+{% block title %}product-detail{% endblock title %}
+{% block styles %}
+<link rel="stylesheet" href="{% static 'products/css/detail.css' %}">
+{% endblock styles %}
 
 {% block content %}
+<main>
+	
+<div class="container">
+	<div class="product-container">
 
-<div> 
-	<h3>{{ product.name }}</h3>
+	<img class="product-image" src="{{product.image.url}}">
+		<p class="label">Name</p>
+			<p>{{ product.name }}</p>
+		<p class="label">Description</p>
 	<p>{{ product.description}}</p>
-
-	<img style="width:100px;height:100px;" src="{{product.image.url}}">
-	<p>Rating: {% if product.get_rating %}{{ product.get_rating }}{% else %} No ratings {% endif %} </p>
-	<p>units left: {{product.get_quantity_in_inventory}} </p>
-	<p>₦{{product.price}}</p><button class="add-to-cart-btn" id="{{product.id}}" >add to cart</button>	
+		<p><b>rating: </b><span>{% if product.get_rating %}{{ product.get_rating }}{% else %} no ratings {% endif %} </span></p>
+		<p><b>units left: </b> <span>{{product.get_quantity_in_inventory}} </span></p>
+	<p class="label"><b>price: </b>₦{{product.price|intcomma}}</p><button class="add-to-cart-btn" id="{{product.id}}" >add to cart</button>	
 
 </div>
-<div>
+<div class="container">
 	<h3>Reviews</h3>
 	{% if product_reviews %}
 	{% for review in product_reviews %}
@@ -22,10 +31,12 @@
 	<p>Rating: {{ review.rating }}</p>
 
 	{% endfor %}
+</div>
 	{% else %}
 	<div> No Reviews available </div>
 	{% endif %}
 
 </div>
+</main>
 {% endblock content %}
- 
+

@@ -1,16 +1,20 @@
 {% extends 'base.html' %}
-
+{% load static %}
 {% block title %}product categories{% endblock %}
-
+{% block styles %}
+<link rel="stylesheet" href="{% static 'products/css/base.css' %}">
+{% endblock styles %}
 {% block content %}
+<main>
 <h2>Categories</h2>
 {% if category_list %}
 {% for category in category_list %}
-<ul>
+<ul class="category-list">
 	<li><a href="{{category.get_absolute_url}}" >{{category}}</a></li>
 </ul>
 {% endfor %}
 {% else %}
 <div>No Available Categories </div>
 {% endif %}
+	</main>
 {% endblock content %}

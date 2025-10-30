@@ -1,0 +1,98 @@
+.form{
+  width: 90%;
+  margin: auto;
+  padding: 10px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  margin-bottom: 100px;
+  line-height: 1.6em;
+  border-width : 0px;
+  border-radius: 5px;
+  box-shadow: 0 0 3px 2px #ccc;
+  background-color: #fff;
+}
+.form input{
+  font-size: 16px;
+  display: block;
+  height: 40px;
+  line-height: 40px;
+  width: 80%;
+  margin: auto;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  padding: 0 8;
+  box-sizing: border-box;
+}
+.form input:focus{
+   outline-color: darkslateblue;
+}
+.form button, .auth-form a{
+  display: block;
+  width: 80%;
+  box-sizing: border-box;
+  margin: auto;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  height: 40px;
+  line-height: 40px;
+  border-style: solid;
+  border-radius: 5px;
+  text-align: center;
+  font-size: 16px;
+}
+.form button{
+  background-color: darkslateblue;
+  color: #fff;
+  border-style: none;
+}
+.form a{
+  text-decoration: none;
+  background-color: #fff;
+  color: darkslateblue;
+}
+.form p{
+  text-align: center;
+}
+.form label{
+  display: block;
+  margin-left: 10%;
+}
+h2{
+  text-align: center;
+  font-size: 32px;
+  text-shadow: 0 0 2px #ccc;
+}
+
+#login-form label{
+  visibility: hidden;
+}
+.invalid-feedback{
+  color: red;
+  margin-left: 10%;
+  font-size: 14px;
+}
+
+#cart-info{
+  width: 90%;
+  display: block;
+  box-sizing: border-box;
+  margin: auto;
+  margin-bottom: 20px;
+  padding: 10px;
+  border-style: none;
+  border-radius: 10px;
+  box-shadow: 0 0 2px 2px #ccc;
+  background-color: #fff;
+}
+#cart-info p{
+  font-weight: bold;
+}
+#cart-info .item-price{
+  display: block;
+  margin: auto;
+  border-radius: 10px;
+  margin: auto;
+  margin-bottom: 10px;
+  padding: 5px;
+  background-color: lawngreen;
+}

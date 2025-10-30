@@ -1,23 +1,29 @@
 <header>
 		<div class="cont" id="head">
-			<h1 id="brand-name">Vendora</h1>
+			<h1 id="brand-name"><a href="/">Vendora</a></h1>
 <nav class="navbar">
 	<ul>
 				<li><a href="{% url 'store:index' %}" class="nav-link">store</a></li>
 		<li><a href="{% url 'orders:list' 'all' %}" class="nav-link">orders</a></li>
 		<li><a href="{% url 'products:categories' %}" class="nav-link" >categories</a></li>
+				<li><a href="{% url 'customers:logout' %}">
+							logout
+				</a></li>
 	</ul>
-				<div class="shot-cont" id="navbar-search-icon">
-							<a href="" class="shot-link"><img class="shot" src="/media/images/icons/search.svg"></a>
-							
+			<div class="shot-cont">
 							<a href="{% url 'orders:cart_view' %}" class="shot-link" id="cart"><img class="shot" id="navbar-cart-icon"src="/media/images/icons/cart3.svg"><p id="cart-cnt" class="notification-dot"></p></a>
 							
-							<a href="" class="shot-link"><img class="shot" id="navbar-headshot"src="/media/images/icons/person.svg"><p id="notify-dot" class="notification-dot"></p></a>
+							<a href="{% url 'customers:profile' %}"
+										class="shot-link"><img class="shot" id="navbar-headshot"src="/media/images/icons/person.svg"><p id="notify-dot" class="notification-dot"></p></a>
 							<img class="menuicon" id="menu-icon" src="/media/images/menuicon01.png">
 			</div>
+			</div>
 </nav>
-		
 		</div>
+			<div id="search-cont">
+				<input placeholder="search for a product" type="text" id="search-box">
+				<img id="search-icon" src="/media/images/icons/search.svg">
+			</div>
 				<div id="banner" class="cont" style="display: none;">
 							<h2 id="page-name">Shop</h2>
 				</div>

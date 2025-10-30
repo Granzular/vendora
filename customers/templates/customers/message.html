@@ -67,29 +67,21 @@
     border-color: darkslateblue;
   }
   </style>
-{% load static %}
-{% load crispy_forms_tags %}
-<link rel="stylesheet" href="{% static 'customers/css/base.css' %}">
 </head>
 <body>
   <header><h1>Vendora</h1></header>
-
-<main>
-		<h2>Login</h2>  
-<form method="POST" action="" class="auth-form" id="login-form">
-	{% if error %}
-	{{ error }}
-	{% endif %}
-
-	{% csrf_token %}
-	{{ loginform }}
-		<br>
-	<br>
-	<button type="submit" >Login</button>
-	<p> don't have an account?</p>
-	<a href="{% url 'customers:signup' %}" >signup here</a>
-</form>
-	
-	</main>
+  <main>
+  {% if success %}
+  <div class="msg" id="success"><p>{{success}}</p>
+    <a href="/">Home</a>
+  </div>
+  {% else %}
+    {% if failed %}
+  <div class="msg" id="failed"><p>{{failed}}</p>
+    <a href="{% url 'customers:login' %}">Re login</a>
+  </div>
+  {% endif %}
+    {% endif %}
+  </main>
 </body>
 </html>

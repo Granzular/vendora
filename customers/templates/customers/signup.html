@@ -1,12 +1,45 @@
-{% extends "base.html" %}
-{% load static %}
+<!DOCTYPE html>
 
-{% block title %}signup{% endblock title %}
+<html>
+<head>
+  <meta http-equiv="CONTENT-TYPE" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vendora</title>
+  <style>
+  body{
+    margin: 0;
+    padding: 10px;
+    background-color: #fff;
+    color: #333;
+    font-size: 16px;
+    font-family: serif;
+  }
+  header{
+    display: block;
+    width: 100%;
+    height: 10vh;
+    background-color: darkslateblue;
+    color: #fff;
+    border-radius: 15px;
+  }
+  h1{
+    font-size: 16px;
+    line-height: 10vh;
+    height: 10vh;
+    padding-left: 10px;
+  }
+  
+  </style>
+  {% load static %}
+{% load crispy_forms_tags %}
+<link rel="stylesheet" href="{% static 'customers/css/base.css' %}">
+</head>
+<body>
+  <header><h1>Vendora</h1></header>
 
-{% block content %}
-<form method="POST" action="" id='signup_form' >
-	<h2>SignUp</h2>
-
+<main>
+	<h2>Sign Up</h2>
+<form method="POST" action="" id='signup-form' class="auth-form">
 	{% if error %}
 	{{error}}
 	{% endif %}
@@ -14,15 +47,30 @@
 	{% csrf_token %}
 	
 	<p id="error_msg_box"></p>
-	{{signupform }}
+	
+  {% for field in signupform %}
+    <div class="form-group">     <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+      {{ field.as_widget}}
+      <div id="id_{{ field.name }}_errors" class="invalid-feedback d-block">
+        {% if field.errors %}
+          {% for error in field.errors %}
+            <div>{{ error }}</div>
+          {% endfor %}
+        {% endif %}
+      </div>
+    </div>
+  {% endfor %}
 
+	<br>
+	<br>
 	<button type="submit" id="signup_button">Signup</button> 
 
 	<p> already have an account?</p>
 	<a href="{% url 'customers:login' %}" >login</a>
 </form>
-{% endblock content %}
+	
+	</main>
 
-{% block scripts %}
-<script  src="{% static 'customers/js/confirm_password.js' %}"><script>
-{% endblock scripts %}
+<script  src="{% static 'customers/js/confirm_password.js' %}"></script>
+</body>
+  </html>

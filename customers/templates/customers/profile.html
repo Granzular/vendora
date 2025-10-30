@@ -1,0 +1,21 @@
+ {% extends "base.html" %}
+{% load static %}
+{% block title %}profile{% endblock title %}
+{% block styles %}
+<link rel="stylesheet" href="{% static 'customers/css/base.css' %}">
+{% endblock styles %}
+
+{% block content %}
+<main>
+  <h2>Profile</h2>
+  <img src="{{user.customer.avatar.url}}" alt="profile picture" id="profile-picture">
+    <p>Username: <span>{{user.username }}</span></p>
+  <form action="" method="POST" class="auth-form">
+    {% csrf_token %}
+    {{ form }}
+    <br>
+    <br>
+    <button type="submit">Save Changes</button>
+  </form>
+	</main>
+{% endblock content %}

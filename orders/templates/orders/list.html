@@ -1,20 +1,37 @@
 {% extends "base.html" %}
-
+{% load static humanize %}
 {% block title %}orders{% endblock title %}
-
+{% block styles %}
+<link rel="stylesheet" href="{% static 'orders/css/orders.css' %}">
+{% endblock styles %}
 {% block content %}
+<main>
+	<h2>Orders</h2>
+	
 {% if orders %}
 {% for order in orders %}
+	<h3>Order {{forloop.counter}}</h3>
+<div class="kard">
+	<p class="label">Order id</p>
+	<p class="field">{{order.order_id}}</p>
 
-<div>Order no: {{order.order_id}}
 	{% for pos in order.positions.all %}
-	<p>item:  {{pos.product.name}} quantity: {{pos.quantity}}  </p>
+	<h4>Item {{forloop.counter}}</h4>
+	<p class="field">{{pos.product.name}}</p>
+	<p class="field">quantity: {{pos.quantity}}</p>
+	<p class="field">sub total: ₦{{pos.price|intcomma}}</p>
 	{% endfor %}
-	<p>status: {{order.status}}</p>
-	<a href="{{order.get_absolute_url}}">view order</a>
+	<br>
+	<p class="label">Status</p>
+	<p class="field">{{order.status}}</p>
+	<p class="label">Total price</p>
+	<p class="field"><strong>₦{{order.total_price|intcomma}}</strong></p>
+	<a class="a-btn" href="{{order.get_absolute_url}}">view order</a>
 </div>
+	<br>
 {% endfor %}
 {% else %}
 <div>No orders are available </div>
 {% endif %}
+	</main>
 {% endblock content %}

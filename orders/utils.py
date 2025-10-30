@@ -1,4 +1,4 @@
-from .models import Order, Cart, CartPosition
+from .models import Order, OrderPosition, Cart, CartPosition
 from customers.models import Customer
 from products.utils import get_product_by_id
 from django.db.utils import IntegrityError
@@ -72,4 +72,16 @@ def remove_from_cart(user,pk,update=False):
     else:
         cart_item.delete()
     return cart_item.quantity or None
- 
+
+def create_order(user):
+    order = Order.objects.create(customer=user.customer_set.all()[0])
+    cart = get_cart_by_user(user)["response"]
+
+    for item in cart.positions.all():
+        op = OrderPosition.objects.create(product=item.product,quantity=item.quantity,price=item.total_price())
+        order.positions.add(op)
+
+    order.save()
+    cart.status = "checked_out" # sets current cart to inactive, triggers creation of a new one
+    cart.save()
+    return order

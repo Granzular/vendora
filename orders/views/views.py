@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from ..models import Order
-from ..utils import get_orders_list_by_user,get_order_by_user, get_cart_by_user, add_to_cart, remove_from_cart
+from ..utils import get_orders_list_by_user,get_order_by_user, get_cart_by_user, add_to_cart, remove_from_cart, create_order
+from ..forms import CheckoutForm
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import csrf_exempt
 from django.http import HttpResponse, JsonResponse
@@ -36,20 +37,6 @@ def orders_detail_view(request,pk):
 @login_required
 def cart_view(request):
     if request.method == "GET":
-        if request.headers.get("X-Requested-With")=="XMLHttpRequest":
-            cart = get_cart_by_user(request.user)["response"]
-            context = {
-                    "totalCartPrice" : cart.total_price(),
-                    "cartCount" : len(cart.positions.all()),
-                    "cartItems" :[],
-                    "cart" : []
-                    }
-            for item in  cart.positions.all():
-                context["cartItems"].append({"price":item.product.price,"subTotal":item.total_price(),"product":item.product.id,"quantity":item.quantity})
-            for item in cart.positions.all():
-                context["cart"].append({"product":item.product.id,"quantity":item.quantity})
-            return JsonResponse(context)
-        else:
             cart = get_cart_by_user(request.user)["response"]
             empty = True if len(cart.positions.all())<=0 else False
 
@@ -69,10 +56,46 @@ def cart_view(request):
             data = json.loads(request.body)
             remove_from_cart(request.user,data["product"])
             return JsonResponse({},status=200)
-    elif request.method == "UPDATE":
+    elif request.method == "PATCH":
         if request.headers.get("X-Requested-With")=="XMLHttpRequest":
             data = json.loads(request.body)
             res = remove_from_cart(request.user,data["product"],update=True)
             return JsonResponse({"res":res},status=200)
 
+@login_required
+def checkout(request):
+    
+    if request.method == "GET":
 
+        cart = get_cart_by_user(request.user)["response"]
+        fname = request.user.first_name
+        lname = request.user.last_name
+        email = request.user.email
+        cust = request.user.customer_set.all()[0]
+        addr = cust.address
+        phone = cust.phone
+
+        checkout_form = CheckoutForm(initial={"first_name":fname,"last_name":lname,"email":email,"delivery_address":addr,"phone":phone})
+        context = {
+                "checkout_form" : checkout_form,
+                "cart" : cart
+
+                }
+        return render(request,"orders/checkout.html",context)
+
+    elif request.method == "POST":
+        form = CheckoutForm(request.POST)
+        if form.is_valid():
+            fname = form.cleaned_data.get("first_name")
+            lname = form.cleaned_data.get("last_name")
+            email = form.cleaned_data.get("email")
+            addr  = form.cleaned_data.get("delivery_address")
+            phone = form.cleaned_data.get("phone")
+            # create order
+            order = create_order(request.user)
+
+            # initialize payment
+
+            return HttpResponse("<h1>Ok</h1>")
+        else:
+            return HttpResponse("<h1>NOT OK</h1>",status=400)

@@ -14,7 +14,10 @@
 </head>
 <body>
 	{% include 'navbar.html' %}
-      
+    <section id="search-result-section">
+        
+        </div>
+    </section>
 	{% block content %}
 
 	{% endblock content %}
@@ -35,9 +38,11 @@ document.querySelector("#year").innerHTML = date.getFullYear();
 </script>
     </footer>
 </body>
-
+{% if user.is_authenticated %}
   <script type="text/javascript" src="{% static 'orders/js/cart.js' %}"></script>
+{% endif %}
      <script type="text/javascript" src="{% static 'js/navbar.js' %}"></script>
+  <script type="text/javascript" src="{% static 'js/search.js' %}"></script>
 	{% block scripts %}
 	{% endblock scripts %}
    

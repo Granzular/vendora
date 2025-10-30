@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+{% load static %}
+{% load humanize %}
+{% block title %}checkout{% endblock title %}
+{% block styles %}
+<link rel="stylesheet" href="{% static 'orders/css/checkout.css' %}">
+{% endblock styles %}
+{% block content %}
+<main>
+  <h2>Checkout</h2>
+  <h3>Cart Info</h3>
+  <div id="cart-info">
+    <p><b>Items Set For Purchase</b></p>
+    <ul>
+    {% for item in cart.positions.all %}
+      <li><b>{{item.product.name}}</b><br>quantity: {{item.quantity}}<br>sub-total: <b>₦{{item.total_price|intcomma}}</b></li>
+    {% endfor %}
+    </ul>
+    <p class="item-price">Total Amount: ₦{{cart.total_price|intcomma}}</p>
+  </div>
+  
+  <h3>Delivery Info</h3>
+  <form method="POST" action="" class="form">
+    {% if checkout_form %}
+ 
+	{% if error %}
+	{{error}}
+	{% endif %}
+
+	{% csrf_token %}
+	
+	<p id="error_msg_box"></p>
+	
+  {% for field in checkout_form %}
+    <div class="form-group">     <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+      {{ field.as_widget}}
+      <div id="id_{{ field.name }}_errors" class="invalid-feedback d-block">
+        {% if field.errors %}
+          {% for error in field.errors %}
+            <div>{{ error }}</div>
+          {% endfor %}
+        {% endif %}
+      </div>
+    </div>
+  {% endfor %}
+
+	<br>
+	<br>
+	<button type="submit" id="checkout-btn">Finalize</button> 
+
+</form>
+    {% else %}
+    <div>
+      oops an error occurred. Try again later.
+      <a href="/">check out some new products</a>
+    </div>
+    {% endif %}
+  </form>
+</main>
+{% endblock content %}
+
+{% block scripts %}
+<script type="application/javascript" src="{% static 'orders/js/checkout.js' %}"></script>
+{% endblock scripts %}
