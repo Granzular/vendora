@@ -2,6 +2,7 @@ from .models import Order, OrderPosition, Cart, CartPosition
 from customers.models import Customer
 from products.utils import get_product_by_id
 from django.db.utils import IntegrityError
+from django.http import Http404
 def get_orders_list_by_user(status,user):
     """
     returns a dict that contains a the cart object that can be accessed with 'response' key. check for 'error' key for errors
@@ -36,18 +37,20 @@ def get_cart_by_user(user):
     try:
         customer = Customer.objects.get(user=user)
         cart = Cart.objects.get(customer=customer,status="active")
-        return {"response":cart}
+        return cart
     
     except Customer.DoesNotExist as err:
-        return {"error":err}
+        raise Http404Error
 
     except Cart.DoesNotExist:
         cart = Cart.objects.create(customer=customer,status="active")
-        return {"response":cart}
+        return cart
 
 def add_to_cart(user,data):
 
-    cart = get_cart_by_user(user)["response"]
+    cart = get_cart_by_user(user)
+    if cart == None:
+        return None
     product = get_product_by_id(data["product"])
     quantity = data["quantity"]
     try:
@@ -60,7 +63,9 @@ def add_to_cart(user,data):
     return True
 
 def remove_from_cart(user,pk,update=False):
-    cart = get_cart_by_user(user)["response"]
+    cart = get_cart_by_user(user)
+    if cart == None:
+        return None
     cart_item = CartPosition.objects.get(cart=cart,id=pk)
     if update:
         cart_item.quantity -= 1
@@ -75,8 +80,9 @@ def remove_from_cart(user,pk,update=False):
 
 def create_order(user):
     order = Order.objects.create(customer=user.customer_set.all()[0])
-    cart = get_cart_by_user(user)["response"]
-
+    cart = get_cart_by_user(user)
+    if cart == None:
+        return False
     for item in cart.positions.all():
         op = OrderPosition.objects.create(product=item.product,quantity=item.quantity,price=item.total_price())
         order.positions.add(op)

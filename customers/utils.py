@@ -1,11 +1,10 @@
-from django.contrib.auth.models import User
 from django.shortcuts import reverse
-from .models import EmailVerification as EV
+from .models import EmailVerification as EV, Notification, CustomUser
 from django.core.mail import send_mail
 from django.core.mail import EmailMultiAlternatives
 
 def send_confirmation_email(email,username):
-    user = User.objects.get(username=username)
+    user = CustomUser.objects.get(username=username)
     EV.objects.get_or_create(user = user )
     obj = EV.objects.get(user = user)
 
@@ -41,3 +40,7 @@ def verify_secret_key(secret_key):
             return (False,None)
     except:
         return (False,None)
+
+def send_notification(user,msg,url,category="general"):
+    notification = Notification.objects.create(user=user,message=msg,category=category,url=url)
+    return True

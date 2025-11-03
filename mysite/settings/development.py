@@ -7,6 +7,10 @@ SECRET_KEY = 'django-insecure-1fop@ih@55$%ehzh=^+uyqnp-%a0=v5i3)=uivaxd=gj+_yhaq
 DEBUG = True
 
 ALLOWED_HOSTS = ["*"]
+CSRF_TRUSTED_ORIGINS = [
+        "http://127.0.0.1:8080",
+        "http://127.0.0.1:8000",
+        ]
 
 
 STATIC_URL = '/static/'

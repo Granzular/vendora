@@ -4,19 +4,34 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="darkslateblue">
     <title>Vendora|{% block title %}{% endblock title %}</title>
-    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+    <!-- Google Fonts -->
+    <lintk href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="{% static 'css/utils.css' %}">
      <link rel="stylesheet" href="{% static 'css/navbar.css' %}">
      <link rel="stylesheet" href="{% static 'products/css/products.css' %}">
+   <link rel="stylesheet" href="{% static 'css/base.css' %}">
+      <!-- Important Script -->
+  <script type="application/javascript" src="{% static 'js/utils.js' %}"></script>
+      
+  </body>
+</html>
     {% block styles %}
     {% endblock styles %}
 
 </head>
 <body>
 	{% include 'navbar.html' %}
-    <section id="search-result-section">
-        
+    
+    <section id="search-result-section-cont">
+        <div class="search-header">
+            <input type="radio" placeholder="category" name="filter">
+      <h3>Search Results</h3>
+            <button id="close-search-btn"></button><hr>
         </div>
+        <div id="search-result-section"></div>
     </section>
 	{% block content %}
 
@@ -38,8 +53,26 @@ document.querySelector("#year").innerHTML = date.getFullYear();
 </script>
     </footer>
 </body>
+
 {% if user.is_authenticated %}
   <script type="text/javascript" src="{% static 'orders/js/cart.js' %}"></script>
+{% if new_notification %}
+<script type="application/javascript">
+let n = document.querySelector("#bell-dot");
+n.textContent = "{{new_count|escapejs}}";
+n.style.display = "inline-flex";
+</script>
+{% endif %}
+{% else %}
+<script type="text/javascript">
+function add_to_cart(e){
+  toast("Sign in to add to cart!")
+}
+try{
+  [...document.querySelectorAll(".add-to-cart-btn")].map((el)=>{el.addEventListener("click",add_to_cart)});
+}
+catch{}
+</script>
 {% endif %}
      <script type="text/javascript" src="{% static 'js/navbar.js' %}"></script>
   <script type="text/javascript" src="{% static 'js/search.js' %}"></script>

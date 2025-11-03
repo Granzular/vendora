@@ -37,7 +37,7 @@ def orders_detail_view(request,pk):
 @login_required
 def cart_view(request):
     if request.method == "GET":
-            cart = get_cart_by_user(request.user)["response"]
+            cart = get_cart_by_user(request.user)
             empty = True if len(cart.positions.all())<=0 else False
 
             context = {
@@ -67,7 +67,7 @@ def checkout(request):
     
     if request.method == "GET":
 
-        cart = get_cart_by_user(request.user)["response"]
+        cart = get_cart_by_user(request.user)
         fname = request.user.first_name
         lname = request.user.last_name
         email = request.user.email

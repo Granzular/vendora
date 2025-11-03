@@ -5,6 +5,10 @@ function registerEvents(e){
     const searchBox = document.querySelector("#search-box");
     const searchIcon = document.querySelector("#search-icon");
     const searchResult = document.querySelector("#search-result-section");
+    const searchResultCont = document.querySelector("#search-result-section-cont");
+    searchBox.addEventListener("click",(e)=>{searchResultCont.style.display ="block";
+        document.querySelector("#close-search-btn").addEventListener("click",(e)=>{searchResultCont.style.display="none";});
+    });
     searchIcon.addEventListener("click",function (e){
         // start of anonymous function
     const word = searchBox.value;
@@ -15,9 +19,7 @@ function registerEvents(e){
     .then(res=>res.json())
     .then((data)=>{
         console.log(JSON.stringify(data).slice(0,100));
-        let temp = `<div class="search-header">
-      <h3>Search Results</h3>
-            <button id="close-search-btn"></button><hr>`;
+        let temp = "";
         if (data.result.empty){
             temp += `<div class="search-result-item">${data.result.empty}</div>`;
         }
@@ -29,7 +31,11 @@ function registerEvents(e){
         }
         searchResult.innerHTML = temp;
         searchResult.style.display = "block";
-        document.querySelector("#close-search-btn").addEventListener("click",(e)=>{searchResult.style.display="none";});
+        searchResultCont.style.display = "block";
+        document.querySelector("#close-search-btn").addEventListener("click",(e)=>{
+            searchResult.style.display="none";
+            searchResultCont.style.display="none";
+        });
         return data;
     })
     .catch(err=>console.log(err))

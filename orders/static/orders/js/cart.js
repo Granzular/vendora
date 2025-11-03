@@ -178,6 +178,7 @@ function setCart(cart){
 }
 
 function add_to_cart(e){
+    
     const pk = e.target.id;
     let cart = getCart();
     let exist = false;
@@ -194,6 +195,10 @@ function add_to_cart(e){
       updateCartCount();
       syncCartWithServer();
   }
+    else{
+        // if product exist in cart, notify user
+        toast("Product already added");
+    }
 }
 function update_cart(e,action){
     

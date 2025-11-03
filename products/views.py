@@ -33,9 +33,14 @@ def category_products_view(request,category_name):
 def search_view(request):
 
     q = request.GET.get("q")
-    res = Product.objects.filter(name__contains=q) if bool(q.strip()) else []
+    filter_q = request.GET.get("filter")
+    if filter_q:
+        prod = get_products_by_category(filter_q)
+        res = prod.filter(name__contains=q)
+    else:
+        res = Product.objects.filter(name__icontains=q) if bool(q.strip()) else []
 
-    res = [{'name':x.name,'url':x.get_absolute_url(),'image':f"data:media/jpeg;bas64,{base64.b64encode(x.image.read()).decode()}"} for x in res] if len(res)>0 else {"empty":f"no result matching the query '{q}' was found"}
+    res = [{'name':x.name,'url':x.get_absolute_url()} for x in res] if len(res)>0 else {"empty":f"no result matching the query '{q}' was found"}
 
     result = {
             "result" : res }

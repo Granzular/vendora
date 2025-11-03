@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {% load static humanize %}
-{% block title %}{% endblock %}
+{% block title %}Home{% endblock %}
 {% block styles %}
 <link rel="stylesheet" href="{% static 'store/css/index.css' %}">
 {% endblock styles %}
@@ -24,7 +24,7 @@
 	        </a>
         {% endfor %}
         {% else %}
-        <div> No product Available </div>
+        <div class="alert alert-info"> No product Available </div>
         {% endif %}
 </section>
         
@@ -44,7 +44,7 @@
  </a>
         {% endfor %}
         {% else %}
-        <div> No product Available </div>
+        <div class="alert alert-info"> No product Available </div>
         {% endif %}
 </section>
 

@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}notifications{% endblock title %}
+{% block styles %}
+<link rel="stylesheet" href="{% static 'customers/css/base.css' %}">
+{% endblock styles %}
+{% block content %}
+<main>
+  <h3>Notifications</h3>
+{% if notification %}
+<ul class="notification-ul">
+  {% for item in notification %}
+  <li class="notification-list-item {{item.get_css_class}}"><a class="notification-list-item-link" href="{% url 'customers:notification_detail' item.pk %}">
+    {{item.message}}
+  </a></li>
+  {% endfor %}
+</ul>
+{% else %}
+<div>No Notifications</div>
+{% endif %}
+</main>
+{% endblock content %}

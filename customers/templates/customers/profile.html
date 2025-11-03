@@ -1,21 +1,39 @@
  {% extends "base.html" %}
-{% load static %}
+{% load static crispy_forms_tags %}
 {% block title %}profile{% endblock title %}
 {% block styles %}
 <link rel="stylesheet" href="{% static 'customers/css/base.css' %}">
 {% endblock styles %}
-
+{% block scripts %}
+<script src="{% static 'customers/js/profile.js' %}" type="application/javascript"></script>
+{% endblock scripts %}
 {% block content %}
 <main>
-  <h2>Profile</h2>
-  <img src="{{user.customer.avatar.url}}" alt="profile picture" id="profile-picture">
-    <p>Username: <span>{{user.username }}</span></p>
-  <form action="" method="POST" class="auth-form">
+  {% if success %}
+  <script type="application/javascript">
+  if(!window.hasRunAction){
+    window.hasRunAction = true;
+    toast("{{success}}");
+  }
+  
+  </script>
+  {% else %}
+  {% if failure %}
+  <script type="application/javascript">
+  toast("{{failure|escapejs}}");
+  </script>
+  {% endif %}
+  {% endif %}
+  <div>
+  <img src="{{user.customer_set.all.0.avatar.url}}" alt="profile picture" id="profile-picture">
+    <p id="username">{{user.username }}</p>
+  </div>
+  <section id="profile-form" class="auth-form">
     {% csrf_token %}
-    {{ form }}
+    {{ profile_form|crispy }}
     <br>
     <br>
-    <button type="submit">Save Changes</button>
-  </form>
+    <button type="button" id="save-profile-btn">Save Changes</button>
+  </section>
 	</main>
 {% endblock content %}

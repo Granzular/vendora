@@ -18,7 +18,7 @@ from analytics.utils import log
 class CartView(APIView):
     
     def get(self,request,pk=None):
-        cart = get_cart_by_user(request.user)["response"]
+        cart = get_cart_by_user(request.user)
         if pk:
             cart_item = get_object_or_404(CartPosition,cart=cart)
             serializer = CartSerializer(cart_item)
@@ -30,7 +30,7 @@ class CartView(APIView):
     def post(self,request):
         serializer = CartPositionSerializer(data=request.data)
         if serializer.is_valid():
-            serializer.save(cart=get_cart_by_user(request.user)["response"])
+            serializer.save(cart=get_cart_by_user(request.user))
             return Response(serializer.data,status=status.HTTP_201_CREATED)
         else:
             log(f"Orders/views/api(2):POST:  {request.data}")
@@ -69,7 +69,7 @@ def bulk_create_cart(request):
     serializer.is_valid(raise_exception=True)
     log("Orders bulk-create: after is valid")
     serializer.save(cart=get_cart_by_user(
-request.user)["response"])
+request.user))
     return Response(serializer.data, status=status.HTTP_201_CREATED)
 
 
@@ -81,7 +81,7 @@ def bulk_update_cart(request):
     Update multiple cart items.
     Each object must contain an 'id' field.
     """
-    cart = get_cart_by_user(request.user)["response"]
+    cart = get_cart_by_user(request.user)
     if not isinstance(request.data, list):
         return Response({"error": "Expected a list of objects"}, status=status.HTTP_400_BAD_REQUEST)
  
@@ -113,7 +113,7 @@ def bulk_delete_cart(request):
     Delete multiple cart items by IDs.
     Expects {"ids": [1, 2, 3]}.
     """
-    cart = get_cart_by_user(request.user)["response"]
+    cart = get_cart_by_user(request.user)
     ids = request.data.get("ids", [])
     if not isinstance(ids, list):
         return Response({"error": "ids must be a list"}, status=status.HTTP_400_BAD_REQUEST)
@@ -128,7 +128,7 @@ def bulk_delete_cart(request):
 def cart_view(request):
     if request.method == "GET":
         if request.headers.get("X-Requested-With")=="XMLHttpRequest":
-            cart = get_cart_by_user(request.user)["response"]
+            cart = get_cart_by_user(request.user)
             context = {
                     "totalCartPrice" : cart.total_price(),
                     "cartCount" : len(cart.positions.all()),

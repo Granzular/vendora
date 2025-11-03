@@ -73,6 +73,8 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                # custom processors
+                'customers.context_processors.notification',
             ],
         },
     },
@@ -94,6 +96,8 @@ DATABASES = {
 
 # Password validation
 # https://docs.djangoproject.com/en/5.2/ref/settings/#auth-password-validators
+
+AUTH_USER_MODEL = "customers.CustomUser"
 
 AUTH_PASSWORD_VALIDATORS = [
     {

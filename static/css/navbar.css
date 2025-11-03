@@ -1,4 +1,5 @@
 header{
+  min-height: 20vh; 
   position: fixed;
   top: 0;
   width: 100%;
@@ -66,8 +67,8 @@ header{
   width: 40px;
   height: 40px;
   color: #fff;
-  padding: 5px;
-  margin: 5px;
+  padding: 2px;
+  margin: 2px;
 }
 .shot-cont{
   float: right;
@@ -78,36 +79,49 @@ header{
 }
 .menuicon{
   display: none;
+  margin: 3px;
 }
-
+.not,.shot{
+  display: inline-block;
+}
 .notification-dot{
     position: relative;
-    top:-20px;
-    left:-12px;
+    bottom:100%;
+    right: 30%;
     display: none;
     border-radius: 50%;
-    width: 10px;
-    height: 10px;
+    width: 15px;
+    height:15px;
     background-color: red;
     padding: 2px;
-    font-size: 10px;
+    font-size: 12px;
+    font-weight: bold;
     justify-content: center;
     align-items: center;
     color: #fff;
   }
+
 #search-cont{
-  border:none;
+  margin: auto;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  width: 95%;
+  height: 32px;
+  border-radius: 10px;
+  border-style: none;
+  border-radius: 10px;
 }
 #search-box{
-  margin: 2px;
-  width: 80%;
-  height: 32px;
+  margin: 0px;
+  width: 100%;
+  height: 100%;
   line-height: 32px;
   font-size: 16px;
-  border-style: solid;
-  border-width: 0.8px;
+  border-style: none;
   border-radius: 15px;
+  background-color: #fff;
 }
+
 #search-box::placeholder{
   color: #444;
   line-height: 32px;
@@ -115,9 +129,14 @@ header{
 }
 #search-box:focus{
   outline-color: darkslateblue;
-  outline-width: 2;
+  
 }
 #search-cont img{
+  display: inline;
+  position: relative;
+  bottom: 100%; 
+  left: 95%;
+  z-index: 999999;
   border-style: none;
   width: 22px;
   height: 22px;
@@ -125,7 +144,7 @@ header{
   padding: 0px;
   margin: 0px;
 }
-#search-result-section{
+#search-result-section-cont{
   z-index: 9999;
   background-color: #fff;
   width: 100%;
@@ -167,7 +186,7 @@ header{
   border-bottom-style: solid;
   border-width: 0.5px;
 }
-
+/* Mobile Styles */
 @media screen and (max-width:600px){
     .navbar ul{
       font-weight: bold;
@@ -210,17 +229,35 @@ header{
   font-size: 20px;
 }
   .shot, .menuicon{
-    width:20px;
-    height: 20px;
+    width:24px;
+    height: 24px;
   }
-  .shot:hover{
-  width: 24px;
-  height: 24px;
-}
+  
   .menuicon{
     display: inline-block;
     position: relative;
     right: 0;
+  }
+  .not{
+    display: inline-block;
+    height: 24px;
+  }
+  #search-cont img{
+    left: 92%;
+  }
+}
+/* Desktop Styles */
+@media screen and (min-width: 700px){
+ #search-cont{
+   margin: auto;
+   margin-top: 5px;
+   margin-bottom: 5px;
+   width: 50%;
+   height: 32px;
+}
+not{
+    display: inline-block;
+    height: 40px;
   }
 }
 

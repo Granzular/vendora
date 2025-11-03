@@ -28,7 +28,6 @@
   box-sizing: border-box;
   width: 100%;
   margin: 0;
-  /*border: solid red 1px;*/
   background-color: #eee;
  }
 .cart-cont{
@@ -45,17 +44,13 @@
   height: 60%;
   border-radius: 2.5px;
 }
-.cart-info{
-  
-}
+
 .cartitem-name{
-  /*border: solid red;*/
   padding: 0px 3px 0px 3px;
   font-size: 12px;
   display: block;
 }
 .cartitem-price{
-  /*border: solid blue;*/
   margin-top: -10px;
   padding: 0px 3px 0px 3px;
   display: block;
