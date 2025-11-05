@@ -4,9 +4,7 @@ set -e
 echo "SETUP WIZ"
 echo "Installing project dependencies"
 pip install -r requirements.txt
-echo "Making migrations..."
-python manage.py makemigrations --settings=mysite.settings.production
-echo "Done..."
+
 echo "Running Migrations..."
 python manage.py migrate --settings=mysite.settings.production
 echo "Done..."
