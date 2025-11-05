@@ -8,6 +8,8 @@ urlpatterns = [
         path("<pk>/detail/",views.orders_detail_view,name="detail"),
         path("cart-view/",views.cart_view,name="cart_view"),
         path("checkout/",views.checkout,name="checkout"),
+        path("checkout/verify-payment/",views.verify_payment,name="verify_payment"),
+        path("checkout/paystack/webhook/",views.paystack_webhook,name="paystack_webhook")
         
         ]
 ## DRF APIs View

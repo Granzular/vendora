@@ -14,6 +14,12 @@ The settings file has been split into base.py, development.py and production.py,
 """
 
 from pathlib import Path
+import dotenv
+import os
+
+status = dotenv.load_dotenv()
+if status == False:
+    raise Warning("Environment Variables were not loaded correctly! ")
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
@@ -22,8 +28,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent.parent
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
 
+# NOTE remember to update this if hosting platform or domain name is changed.
 ALLOWED_HOSTS = []
-
+HOST_BASE_URL = "https://vendora.pythonanywhere.com" 
 
 # Application definition
 
@@ -83,16 +90,6 @@ TEMPLATES = [
 WSGI_APPLICATION = 'mysite.wsgi.application'
 
 
-# Database
-# https://docs.djangoproject.com/en/5.2/ref/settings/#databases
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
-}
-
 
 # Password validation
 # https://docs.djangoproject.com/en/5.2/ref/settings/#auth-password-validators
@@ -132,3 +129,7 @@ USE_TZ = True
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 LOGIN_URL = "/customers/accounts/login"
+
+# PAYMENT GATEWAY VARIABLES
+
+PAYSTACK_SECRET_KEY = os.getenv("PAYSTACK_SECRET_KEY")

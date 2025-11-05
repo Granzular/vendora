@@ -1,12 +1,14 @@
-from django.shortcuts import render
+from django.shortcuts import render, reverse, redirect
 from ..models import Order
 from ..utils import get_orders_list_by_user,get_order_by_user, get_cart_by_user, add_to_cart, remove_from_cart, create_order
 from ..forms import CheckoutForm
+from payments.paystack import PaystackClient
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import csrf_exempt
 from django.http import HttpResponse, JsonResponse
 import json
 from django.core import serializers
+from django.conf import settings
 
 @login_required
 def orders_list_view(request,status):
@@ -93,9 +95,48 @@ def checkout(request):
             phone = form.cleaned_data.get("phone")
             # create order
             order = create_order(request.user)
+            amount = order.total_price
 
             # initialize payment
+            paycl = PaystackClient()
+            callback_url =  settings.HOST_BASE_URL + (reverse("orders:verify_payment"))
+            res = paycl.initialize_payment(email,amount,callback_url=callback_url)
+            if res.get("status") == True:
+                data = res["data"]
+                auth_url = data["authorization_url"]
+                reference = data["reference"]
+                order.payment_reference = reference
+                order.save()
+                print(auth_url)
+                return redirect(auth_url)
+            else:
+                return HttpResponse("<h1> An Error Occurred. Try again or Conatct Support"+str(res),status=500)
 
-            return HttpResponse("<h1>Ok</h1>")
         else:
             return HttpResponse("<h1>NOT OK</h1>",status=400)
+
+def verify_payment(request):
+    if request.method == "GET":
+        reference = request.GET.get("reference")
+        order = Order.objects.filter(payment_reference= reference)
+        order = order[0] if len(order)>0 else None
+
+        if order:
+            paycl = PaystackClient()
+            res = paycl.verify_payment(reference)
+            rstatus = res.get("data").get("status")
+            status = paycl.get_status(rstatus)
+            amount = res.get("data").get("amount") / 100
+            if status == "success" and amount == order.total_price:
+                order.payment_status = "processing"
+                order.save()
+                return HttpResponse("<h1>Order Processing</h1>")
+            else:
+                return HttpResponse(f"<h1>Unknown Response{rstatus}",status=400)
+
+        else:
+            return HttpResponse("<h1>Reference Mismatch. Contact support</h1>")
+
+def paystack_webhook(request):
+    if request.method == "POST":
+        pass

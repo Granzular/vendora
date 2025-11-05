@@ -24,6 +24,8 @@
 	<br>
 	<p class="label">Status</p>
 	<p class="field">{{order.status}}</p>
+	<p class="label">Payment Status</p>
+	<p class="field">{{order.payment_status}}</p>
 	<p class="label">Total price</p>
 	<p class="field"><strong>₦{{order.total_price|intcomma}}</strong></p>
 	<a class="a-btn" href="{{order.get_absolute_url}}">view order</a>
