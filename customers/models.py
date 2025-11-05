@@ -12,7 +12,7 @@ def send_notification(user,msg,url,category="general"):
 
 
 class CustomUser(AbstractUser):
-    user_type = models.CharField(blank=False,null=False)
+    user_type = models.CharField(blank=False,null=False,max_length=30)
     """def __init__(self,*args,**kwargs):
         super().__init__(*args,**kwargs)
         send_notification(self,"Account Created",reverse("customers:profile"))"""
@@ -70,7 +70,7 @@ class Customer(models.Model):
 
 class EmailVerification(models.Model):
     user = models.ForeignKey(CustomUser,on_delete=models.CASCADE)
-    secret_key = models.CharField(blank=True)
+    secret_key = models.CharField(blank=True,max_length=100)
     created = models.DateTimeField(auto_now_add=True)
     @property
     def has_expired(self):
