@@ -23,8 +23,6 @@ MEDIA_ROOT = BASE_DIR / 'media'
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
-
-
 DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.mysql',
@@ -34,16 +32,8 @@ DATABASES = {
             'HOST': os.getenv('DB_HOST'),
             'PORT': os.getenv('DB_PORT'),
             'OPTIONS': {
-                'charset': 'utf8mb4',
-                'init_command':(
-                        "SET sql_mode='STRICT_TRANS_TABLES';"
-                        "SET default_storage_engine=INNOD ;"
-                        "SET NAMES 'utf8mb4' COLLATE 'utf8mb4_unicode_ci';"),
-                         
-                        },
-            }
-        }
-
+                'charset': 'utf8mb4',                                 'init_command':(                                              "SET sql_mode='STRICT_TRANS_TABLES';"                                                                       "SET default_storage_engine=INNODB;"
+                        "SET NAMES 'utf8mb4' COLLATE 'utf8mb4_unicode_ci';"),                                                                                                             },                                        }                                                 }
 
 # EMAIL SETTING
 EMAIL_HOST_USER = os.getenv("EMAIL_HOST_USER")
