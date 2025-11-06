@@ -202,3 +202,6 @@ media/
 
 #vim
 *.swp
+
+# sqlite stuff
+prod.db.sqlite3
