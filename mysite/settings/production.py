@@ -25,16 +25,10 @@ MEDIA_ROOT = BASE_DIR / 'media'
 
 DATABASES = {
         'default': {
-            'ENGINE': 'django.db.backends.mysql',
-            'NAME': os.getenv('DB_NAME'),
-            'USER': os.getenv('DB_USER'),
-            'PASSWORD': os.getenv('DB_PASSWORD'),
-            'HOST': os.getenv('DB_HOST'),
-            'PORT': os.getenv('DB_PORT'),
-            'OPTIONS': {
-                'charset': 'utf8mb4',                                 'init_command':(                                              "SET sql_mode='STRICT_TRANS_TABLES';"                                                                       "SET default_storage_engine=INNODB;"
-                        "SET NAMES 'utf8mb4' COLLATE 'utf8mb4_unicode_ci';"),                                                                                                             },                                        }                                                 }
-
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': BASE_DIR / 'prod.db.sqlite3',
+            }
+        }
 # EMAIL SETTING
 EMAIL_HOST_USER = os.getenv("EMAIL_HOST_USER")
 EMAIL_HOST_PASSWORD = os.getenv("EMAIL_HOST_PASSWORD")

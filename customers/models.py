@@ -12,7 +12,7 @@ def send_notification(user,msg,url,category="general"):
 
 
 class CustomUser(AbstractUser):
-    user_type = models.CharField(blank=False,null=False,max_length=30)
+    user_type = models.CharField(blank=True,null=True,max_length=30)
     """def __init__(self,*args,**kwargs):
         super().__init__(*args,**kwargs)
         send_notification(self,"Account Created",reverse("customers:profile"))"""
