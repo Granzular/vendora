@@ -5,10 +5,10 @@ import os
 SECRET_KEY = os.getenv("SECRET_KEY")
 DEBUG = False
 
-ALLOWED_HOSTS = ["https://vendora.pythonanywhere.com",]
-HOST_BASE_URL = ALLOWED_HOSTS[0]
+ALLOWED_HOSTS = ["vendora.pythonanywhere.com",]
+HOST_BASE_URL = "https://"+ALLOWED_HOSTS[0]
 
-CSRF_TRUSTED_ORIGINS = [ALLOWED_HOSTS[0]]
+CSRF_TRUSTED_ORIGINS = "https://"+[ALLOWED_HOSTS[0]]
 
 
 STATIC_URL = '/static/'
