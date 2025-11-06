@@ -40,7 +40,7 @@ def get_cart_by_user(user):
         return cart
     
     except Customer.DoesNotExist as err:
-        raise Http404Error
+        raise Http404
 
     except Cart.DoesNotExist:
         cart = Cart.objects.create(customer=customer,status="active")
