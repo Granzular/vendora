@@ -62,11 +62,15 @@ class Customer(models.Model):
                 send_notification(self.user,"Address Updated",reverse("customers:profile"))
             if old_instance.phone != self.phone:
                 send_notification(self.user,"Phone Updated",reverse("customers:profile"),category="security")
-            if old_instance.avatar.url != self.avatar.url:
+            if old_instance.avatar.name != self.avatar.name:
                 send_notification(self.user,"Profile picture Updated",reverse("customers:profile"),category="security")
         super().save(*args,**kwargs)
 
-
+    def avatar_url(self):
+        try:
+            return self.avatar.url
+        except ValueError:
+            return '/media/images/icons/person.svg'
 
 class EmailVerification(models.Model):
     user = models.ForeignKey(CustomUser,on_delete=models.CASCADE)
