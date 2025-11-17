@@ -1,6 +1,8 @@
 window.addEventListener("load",registerEvents,false);
 
 function registerEvents(e){
+	document.getElementsByTagName("input")[1].focus();
+	
 let password = document.getElementById("id_password");
 let confirm_password = document.getElementById("id_confirm_password");
 let form = document.getElementById("signup-form");

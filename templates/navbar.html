@@ -1,15 +1,13 @@
 <header>
 		<div class="cont" id="head">
-			<h1 id="brand-name"><a href="/">Vendora</a></h1>
+			<h1 id="brand-name"><a href="{% url 'store:index' %}">Vendora</a></h1>
 <nav class="navbar">
 	<ul>
 				<li><a href="{% url 'store:index' %}" class="nav-link">store</a></li>
-		<li><a href="{% url 'orders:list' 'all' %}" class="nav-link">orders</a></li>
 		<li><a href="{% url 'products:categories' %}" class="nav-link" >categories</a></li>
-				{% if user.is_authenticated %}
-				<li><a class="nav-link" href="{% url 'customers:logout' %}">logout</a></li>
-				{% else %}
-				<li><a class="nav-link" href="{% url 'customers:login' %}">login</a></li>
+						{% if user.is_authenticated %}
+		<li><a href="{% url 'orders:list' 'all' %}" class="nav-link">orders</a></li>
+				<li><a class="nav-link" id="btn-logout" href="{% url 'customers:logout' %}">logout</a></li>
 				{% endif %}
 	</ul>
 			<div class="shot-cont">
@@ -21,16 +19,21 @@
 								<a href="{% url 'customers:notification_list' %}"
 										class="shot-link not">
 										<img class="shot" id="navbar-bell"src="/media/images/icons/bell.svg"><p class="notification-dot" id="bell-dot"></p></a>
+						
 					<img class="menuicon" id="menu-icon" src="/media/images/menuicon01.png">
 			</div>
 			</div>
 </nav>
-		</div>
+			{% if user.is_authenticated %}
+			
+			{% else %}
+						<div class="btn-cont">
+			<a class="btn btn-register" href="{% url 'customers:signup' %}">Register</a>|<a class="btn btn-login" href="{% url 'customers:login' %}">Login</a>
+										</div>
+			{% endif %}
+			
 			<div id="search-cont">
 				<input placeholder="search for a product" type="text" id="search-box">
 				<img id="search-icon" src="/media/images/icons/search.svg">
 			</div>
-				<div id="banner" class="cont" style="display: none;">
-							<h2 id="page-name">Shop</h2>
-				</div>
 </header>

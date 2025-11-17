@@ -1,0 +1,108 @@
+
+main{
+  height: 100vh;
+  
+}
+body{
+  font-family: "Helvetica";
+  background: linear-gradient(135deg, darkslateblue,#4db6ac,darkslateblue);
+  
+}
+.hero-box{
+  width: 90%;
+  min-height: 50vh;
+  margin: auto;
+  padding: 5px;
+  overflow: hidden;
+  border-style: none;
+  border-block-start: solid 1px #fff;
+  border-radius: 10px;
+  background: rgba(255,255,255,0.1);
+  backdrop-filter: blur(20px);
+  /*background-image: url("/media/images/icons/cart-fill.svg"), url("http://localhost:5000/images/shop_bg03.jpg");
+  background-repeat: no-repeat;
+  background-position: left top, right bottom;*/
+}
+
+
+.welcome-text{
+  line-height: 1em;
+  word-spacing: 0.2em;
+  font-family: courier;
+  text-align: center;
+  color: #fff;
+  font-size: 30px;
+  font-weight: bold;
+}
+#brandname{
+  color: #6a63c6;
+  line-height: 0.5em;
+  font-family: courier;
+  text-align: center;
+  font-size: 32px;
+  font-weight: bold;
+  margin-bottom: 1.8em;
+}
+.sm-text{
+  font-size: 16px;
+  color: #eee;
+  font-style: italic;
+  text-align: center;
+  margin-bottom: 3em;
+}
+
+.cta-link{
+  text-decoration: none;
+  color: #eee;
+  font-size: 16px;
+  font-weight: bold;
+  display: block;
+  box-sizing: border-box;
+  width: 10em;
+  height: 3em;
+  line-height: 3em;
+  text-align: center;
+  border-style: none;
+  border-width: 1px;
+  border-radius: 25px;
+}
+.cta-link:hover{
+  color:#eee;
+  background-color: darkslateblue;
+}
+#explore{
+  margin: auto;
+  margin-top: 20px;
+  margin-bottom: 10px;
+  background: linear-gradient(135deg,darkslateblue,#6a63c6,darkslateblue);
+}
+
+.cta-block{
+  position: fixed;
+  bottom: 20px;
+  left: 5%;
+  right:5%;
+  display: flex;
+  width: 80%;
+  margin: auto;
+  margin-top: 40px;
+  padding: 10px;
+}
+#cta-login{
+  color: #fff;
+  margin: 5px;
+  border: solid 1.5px;
+  border-color: #333;
+  background-color: rgba(255,255,255,0.3);
+  backdrop-filter: blur(16px);
+}
+#cta-register{
+  margin: 5px;
+  background-color: #ffe;
+  color: #333;
+}
+.hero-box p {
+  margin: 0;
+  padding: 0;
+  display: block;
+}

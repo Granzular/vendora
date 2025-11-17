@@ -34,7 +34,10 @@ class Product(models.Model):
             return rating
 
     def get_quantity_in_inventory(self):
-        quantity = None if len(self.inventory_set.all())==0 else self.inventory_set.all()[0].quantity
+        try:
+            quantity = None if self.inventory.quantity==0 else self.inventory.quantity
+        except:
+            return None
 
         return quantity
 
@@ -57,13 +60,17 @@ class Category(models.Model):
 
 
 class Inventory(models.Model):
-    product = models.ForeignKey(Product,on_delete=models.CASCADE)
+    product = models.OneToOneField(Product,on_delete=models.CASCADE)
     quantity = models.IntegerField()
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
 
+    def __str__(self):
+        return f"{self.product.name}=> {self.quantity}"
+
     class Meta:
-        verbose_name_plural = "Inventories" 
+        verbose_name_plural = "Inventories"
+
 
 class Review(models.Model):
     product = models.ForeignKey(Product,on_delete=models.CASCADE)
@@ -72,4 +79,7 @@ class Review(models.Model):
     rating = models.IntegerField(validators=[MaxValueValidator(5)],default=5)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return f"{self.customer.user.username[:10]}=>{self.product.name}"
 

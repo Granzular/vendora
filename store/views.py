@@ -16,4 +16,5 @@ def index(request):
             }
     return render(request,'store/index.html',context)
 
-
+def hero(request):
+    return render(request,'store/hero.html')

@@ -1,85 +1,26 @@
-<!DOCTYPE html>
-
-<html>
-<head>
-  <meta http-equiv="CONTENT-TYPE" content="text/html; charset=UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Vendora</title>
-  <style>
-  body{
-    margin: 0;
-    padding: 10px;
-    background-color: #fff;
-    color: #333;
-    font-size: 16px;
-    font-family: serif;
-  }
-  header{
-    display: block;
-    width: 100%;
-    height: 10vh;
-    background-color: darkslateblue;
-    color: #fff;
-    border-radius: 15px;
-  }
-  h1{
-    font-size: 16px;
-    line-height: 10vh;
-    height: 10vh;
-    padding-left: 10px;
-  }
-  
-  .msg{
-    width: 80%;
-    height: 30%;
-    border-style: none;
-    border-radius: 10px;
-    box-shadow: 0 0 2px 2px #ccc;
-    background-color: #ffffff;
-    color: #222;
-    margin: auto;
-    margin-top:100px;
-    padding:10px;
-    text-align: center;
-  }
-  #success{
-    color: green;
-    
-  }
-  #failed{
-    color: red;
-  }
-  .msg p{
-    font-size: 24px;
-  }
-  .msg a{
-    display: block;
-    box-sizing: content-box;
-    text-decoration: none;
-    color: darkslateblue;
-    border-style: solid;
-    border-radius: 15px;
-    border-width: 1px;
-    width: 50%;
-    height: 30px;
-    line-height: 30px;
-    margin: auto;
-    border-color: darkslateblue;
-  }
-  </style>
-{% load static %}
+{% extends "base.html" %}
+  {% load static %}
 {% load crispy_forms_tags %}
-<link rel="stylesheet" href="{% static 'customers/css/base.css' %}">
-</head>
-<body>
-  <header><h1>Vendora</h1></header>
 
+{% block styles %}
+<link rel="stylesheet" href="{% static 'customers/css/base.css' %}">
+{% endblock styles %}
+{% block title %}Login{% endblock title %}
+{% block nav %}
+<header>
+	<h1 id="brand-name"><a href="/">Vendora</a></h1>
+</header>
+{% endblock %}
+{% block content %}
 <main>
-		<h2>Login</h2>  
-<form method="POST" action="" class="auth-form" id="login-form">
-	{% if error %}
-	{{ error }}
+ 	{% if error %}
+	<div class="alert alert-danger popup">
+			{{ error }}
+	</div>
 	{% endif %}
+	
+<form method="POST" action="" class="auth-form slidedown" id="login-form">
+			<h2 class="form-heading">Log<span>in</span></h2> 
 
 	{% csrf_token %}
 	{{ loginform }}
@@ -91,5 +32,9 @@
 </form>
 	
 	</main>
-</body>
-</html>
+{% endblock content %}
+  {% block scripts %}
+  <script  src="{% static 'customers/js/confirm_password.js' %}"></script>
+ 
+  {% endblock scripts %}
+

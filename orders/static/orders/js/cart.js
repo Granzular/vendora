@@ -40,7 +40,7 @@ function updateCartUI(e=null){
                 document.querySelector(".cart-section").innerHTML = `
                 <div class="alert alert-warning">
   <strong> Your Cart is currently Empty!</strong>
-  <a href="/" class="btn btn-primary-outline">Explore new products</a>
+  <a href="/store" class="btn btn-primary-outline">Explore new products</a>
 </div>`
             }
         setCart(ct);

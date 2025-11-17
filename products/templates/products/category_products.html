@@ -1,10 +1,13 @@
 {% extends 'base.html' %}
-
-{% block title %}{% endblock %}
-
+{% load static %}
+{% block title %}{{category}}-category{% endblock %}
+{% block styles %}
+<link rel="stylesheet" href="{% static 'products/css/base.css' %}">
+{% endblock styles %}
 {% block content %}
 <main>
-<h2>categories>{{ category }}</h2>
+<h2 class="category-tree"><a href="{% url 'products:categories'  %}">categories</a> > {{ category }}</h2>
+  <hr/><br/>
 {% include "products/partials/product_list.html" %}
 </main>
 {% endblock content %}

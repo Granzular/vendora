@@ -23,8 +23,8 @@
 	<h3>Reviews</h3>
 	{% if product_reviews %}
 	{% for review in product_reviews %}
-<h3>{{ review.customer.user.username }}</h3>
-	<p>{{ review.text }}</p>
+<h3 class="reviewer-name">{{ review.customer.user.username }}</h3>
+	<p class="review-text">{{ review.text }}</p>
 	<p>Rating: {{ review.rating }}</p>
 
 	{% endfor %}

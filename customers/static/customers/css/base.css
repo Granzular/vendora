@@ -1,4 +1,16 @@
+
+@keyframes ups {
+  from{
+    opacity: 0;
+    top: -50vh;
+  }
+  to{
+    opacity: 1;
+    top: 0px;
+  }
+}
 .auth-form{
+  position: relative;
   width: 90%;
   margin: auto;
   padding: 10px;
@@ -8,27 +20,41 @@
   line-height: 1.6em;
   border-width : 0px;
   border-radius: 5px;
-  box-shadow: 0 0 3px 2px #ccc;
   background-color: #fff;
+}
+.slidedown{
+  animation-name: ups;
+  animation-duration: 1.2s;
+  animation-fill-mode: backwards;
+  animation-timing-function: ease-out;
 }
 .auth-form input{
   font-size: 16px;
   display: block;
   height: 40px;
   line-height: 40px;
-  width: 80%;
+  width: 90%;
   margin: auto;
   margin-top: 10px;
   margin-bottom: 10px;
   padding: 0 8;
   box-sizing: border-box;
+  border-radius: 15px;
+  border-width: 1px;
+  border-color: #222;
+  background-color: #fff;
 }
 .auth-form input:focus{
    outline-color: darkslateblue;
 }
+.auth-form input::placeholder{
+  color: #333;
+  font-size: 14px;
+  padding-left: 10px;
+}
 .auth-form button, .auth-form a{
   display: block;
-  width: 80%;
+  width: 90%;
   box-sizing: border-box;
   margin: auto;
   margin-top: 10px;
@@ -36,7 +62,7 @@
   height: 40px;
   line-height: 40px;
   border-style: solid;
-  border-radius: 5px;
+  border-radius: 15px;
   text-align: center;
   font-size: 16px;
 }
@@ -49,6 +75,7 @@
   text-decoration: none;
   background-color: #fff;
   color: darkslateblue;
+  border-style: none;
 }
 .auth-form p{
   text-align: center;
@@ -57,11 +84,28 @@
   display: block;
   margin-left: 10%;
 }
-h2{
-  text-align: center;
-  font-size: 32px;
-  text-shadow: 0 0 2px #ccc;
+
+@keyframes pop{
+  from{
+    font-size: 12px;
+  }
+  to{
+    font-size: 40px;
+  }
 }
+.form-heading{
+  text-align: center;
+  font-size: 40px;
+  color: #333;
+  animation-name: pop;
+  animation-duration: 1.2s;
+  animation-fill-mode: backwards;
+  animation-timing-function: ease-out;
+}
+.form-heading span{
+  color:#6a63c6;
+}
+
 
 #login-form label{
   visibility: hidden;
@@ -97,17 +141,17 @@ h2{
   padding: 0px;
   width: 98%;
   height: 100%;
-  background-color: #fff;
+  background-color: none;
 }
 .notification-list-item{
   width: 100%;
   height: 60px;
   border-style: none;
   border-radius: 10px;
-  box-shadow: 0 0 2px 2px #ccc;
   list-style-type: none;
   padding: 0px;
   margin-bottom: 10px;
+  background-color: rgba(255,255,255,0.8);
 }
 .notification-list-item-link{
   display: block;
@@ -121,5 +165,5 @@ h2{
   font-weight: 500;
 }
 .new-notification{
-  background-color: #eee;
+  background-color: #efebfe;
 }

@@ -21,7 +21,7 @@
       }
 
 body{
-  font-family: var(--font-body);
+  font-family: var(--font-body) "Helvetica";
   margin: 0px;
   padding: 0px;
   line-height: 1.6em;
@@ -117,19 +117,47 @@ a:hover {
         border-width: 1px;
         border-radius: 10px;
         font-size: 16px;
-        font-weight: 400;
+        font-weight: bold;
+        backdrop-filter: blur(16px);
 }
 .alert-info{
-        color: darkorange;
-        border-color: darkorange;
+        color: #fff;
+        border-color: rgba(255,117,80,1);
+        background-color: rgba(255,117,80,0.4);
+        
 }
 .alert-danger{
         color: red;
         border-color: red;
+        background-color: rgba(255,0,0,0.4);
+  color: #fff;
 }
+ @keyframes popup{
+  from{
+    top: -10px;
+    opacity: 0;
+  }
+  to{
+    top: 40px;
+    opacity: 1;
+  }
+}
+.popup{
+  position: fixed;
+  left: 10%;
+  right:10%;
+  top: 40px;
+  z-index: 999999999999;
+  animation-name: popup;
+  animation-delay: 1.2s;
+  animation-duration: 0.3s;
+  animation-fill-mode: backwards;
+  animation-timing-function: ease-out;
+}
+
 main{
   margin: 10px;
-  padding-top: 20vh;
+  padding-top: 30vh;
 }
 footer{
   width: 100%;

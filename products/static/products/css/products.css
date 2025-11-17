@@ -4,16 +4,14 @@
   width: 100%;
   margin: 0;
   /*border: solid red 1px;*/
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: center;
+  display: grid;
+  grid-template-columns: repeat(3,1fr);
+  gap: 10px
   background-color: #eee;
  }
 .product-card{
   width: 6em;
   height: 8em;
-  margin: 6px;
   background-color: #fff;
 }
 .product-card img{

@@ -1,4 +1,4 @@
-from .models import Order, OrderPosition, Cart, CartPosition
+from .models import Order, OrderPosition, Cart, CartPosition, Transaction
 from customers.models import Customer
 from products.utils import get_product_by_id
 from django.db.utils import IntegrityError
@@ -91,3 +91,19 @@ def create_order(user):
     cart.status = "checked_out" # sets current cart to inactive, triggers creation of a new one
     cart.save()
     return order
+
+def create_transaction(order,reference):
+    """ this function checks if transaction with suchvreference exists, if true, it returns it, else creates a new one and returns it """
+    defaults = {
+            "customer":order.customer,
+            "amount":order.total_price,
+            "status":"pending",
+            "reference": reference,
+            }
+    try:
+        trans, created = Transaction.objects.get_or_create(reference=reference, defaults=defaults or {})
+        return trans
+    except:
+        pass
+
+

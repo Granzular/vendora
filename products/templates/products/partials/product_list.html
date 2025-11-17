@@ -1,5 +1,5 @@
-<section class="product-section">
 {% if products %}
+<section class="product-section">
 {% for product in products %}
 
                   <a href="{{product.get_absolute_url}}" class="product-link">  
@@ -12,7 +12,8 @@
         </div>
                   </a>                         
         {% endfor %}
-        {% else %}
-        <div> No product Available </div>
-        {% endif %}
+                
 </section>
+        {% else %}
+        <div class="alert alert-info"> No products Available </div>
+        {% endif %}

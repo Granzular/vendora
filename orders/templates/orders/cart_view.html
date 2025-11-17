@@ -12,7 +12,7 @@
 {% if empty %}
 <div class="alert alert-warning">
   <strong> Your Cart is currently Empty!</strong>
-  <a href="/" class="btn btn-primary-outline">Explore new products</a>
+  <a href="{% url 'store:index' %}" class="btn btn-primary-outline">Explore new products</a>
 </div>
 {% else %}
 {% for item in cart.positions.all %}

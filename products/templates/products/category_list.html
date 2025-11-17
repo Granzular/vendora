@@ -6,13 +6,13 @@
 {% endblock styles %}
 {% block content %}
 <main>
-<h2>Categories</h2>
+<h2 class="heading">Categories</h2>
 {% if category_list %}
+	<div class="category-list">
 {% for category in category_list %}
-<ul class="category-list">
-	<li><a href="{{category.get_absolute_url}}" >{{category}}</a></li>
-</ul>
+	<div class="item" ><a href="{{category.get_absolute_url}}" >{{category}}</a></div>
 {% endfor %}
+	</div>
 {% else %}
 <div>No Available Categories </div>
 {% endif %}

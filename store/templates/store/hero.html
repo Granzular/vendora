@@ -1,0 +1,27 @@
+ {% extends 'base.html' %}
+{% load static humanize %}
+{% block title %}Welcome{% endblock %}
+{% block styles %}
+<link rel="stylesheet" href="{% static 'store/css/hero.css' %}">
+{% endblock styles %}
+{% block scripts %}
+<script type="text/javascript"  src="{% static 'store/js/index.js'%}"></script>
+{% endblock scripts %}
+{% block nav %}
+{% endblock %}
+{% block content %}
+<main>
+  <section class="hero-box">
+  <h2 class="welcome-text">Welcome to</h2>
+  <h1 id="brandname">Vendora</h1>
+  <p class="sm-text">Where shopping meets convenience.</p>
+
+  <a class="cta-link" id="explore" href="{% url 'store:index' %}">Explore</a>
+   
+</section>
+  <section class="cta-block">
+   <a class="cta-link" id="cta-login" href="{% url 'customers:login' %}">Sign in</a>
+   <a class="cta-link" id="cta-register" href="{% url 'customers:signup' %}">Register</a>
+  </section>
+</main>
+{% endblock content %}

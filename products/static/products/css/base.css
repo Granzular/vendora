@@ -1,25 +1,49 @@
-h2{
+.heading{
   text-align: center;
   font-size: 32px;
   text-shadow: 0 0 2px #ccc;
+}
+.category-tree{
+  font-size: 18px;
+  font-weight: 400;
 }
 
 .category-list a{
   margin: auto;
   text-decoration: none;
-  color: #fff;
+  color: #ffe;
+  font-weight: 500;
+  
 }
-.category-list ul{
-  margin-top: 20px;
+.category-list {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
 }
-.category-list li{
-  display: inline-flex;
-  min-width: 100px;
-  height: 32px;
-  line-height: 32px;
+@keyframes shimmer{
+  0%{
+    background: linear-gradient(135deg,#aca7fa,#8b85e8,#8b85e8);
+  }
+  50%{
+    background: linear-gradient(135deg,#8b85e8,#aca7fa,#8b85e8);
+  }
+  100%{
+    background: linear-gradient(135deg,#8b85e8,#8b85e8,#aca7fa);
+  }
+}
+.item {
+  text-align: center;
+  line-height: 100px;
+  height: 100px;
   list-style-type: none;
   border-style: none;
   border-radius: 15px;
-  background-color: darkslateblue;
+  background-color: rgba(255,255,255,0.4);
+  background: linear-gradient(135deg,#8b85e8,#aca7fa,#8b85e8);
+  backdrop-filter: blur(16px);
+  animation-name: shimmer;
+  animation-duration: 2s;
+  animation-iteration-count: infinite;
+  animation-timing-function: ease-out;
 }
 

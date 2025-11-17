@@ -84,12 +84,17 @@ class Order(models.Model):
     positions = models.ManyToManyField(OrderPosition, related_name="orders")
     total_price = models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True)
     customer = models.ForeignKey(Customer, on_delete=models.CASCADE)
-    # NOTE: Add delivery info to fields: contact info and delivery address
+    phone = models.CharField(max_length=20,default="")
+    delivery_address = models.CharField(max_length=100,default="")
     status = models.CharField(choices=STATUS_CHOICES, max_length=30, default='in_progress')
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
+    paid_at = models.DateTimeField(null=True,blank=True)
     payment_status = models.CharField(max_length=20, default="unpaid")  # could be 'unpaid', 'paid', 'failed'
     payment_reference = models.CharField(max_length=100, blank=True, null=True)  # for gateway reference
+    """ payment_status vs status.
+        payment_status tracks payment while status tracks progress of order, from checkout→ payment→ delivery
+    """
 
     def __str__(self):
         return f"Order {self.order_id} | {self.customer.user.username} | {self.status}"
@@ -112,3 +117,25 @@ class Order(models.Model):
 
     class Meta:
         ordering = ['-created']
+
+class Transaction(models.Model):
+    STATUS_CHOICES = (
+            ("success","successful"),
+            ("failed","failed"),
+            ("pending","pending"),
+            )
+    customer = models.ForeignKey(Customer,on_delete=models.CASCADE)
+    order = models.ForeignKey(Order,on_delete=models.CASCADE)
+    amount = models.DecimalField(max_digits=10,decimal_places=2)
+    reference = models.CharField(max_length=100,unique=True)
+    status = models.CharField(max_length=20,choices=STATUS_CHOICES,null=True,blank=True)#failed,successful,pending
+    info = models.CharField(max_length=50,default=" ")
+    payment_gateway = models.CharField(max_length=30,null=True,blank=True)
+    payment_method = models.CharField(max_length=30,null=True,blank=True)
+    created = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"{self.customer.user.username}{self.status}"
+
+    class Meta:
+        ordering = ["-created"]
