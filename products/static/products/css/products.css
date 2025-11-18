@@ -6,7 +6,7 @@
   /*border: solid red 1px;*/
   display: grid;
   grid-template-columns: repeat(3,1fr);
-  gap: 10px
+  gap: 10px;
   background-color: #eee;
  }
 .product-card{
