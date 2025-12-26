@@ -1,5 +1,4 @@
 header{
-  min-height: 20vh; 
   position: fixed;
   top: 0;
   width: 100%;
@@ -25,6 +24,7 @@ header{
 #brand-name a{
   text-decoration: none;
   color: #fff;
+  font-size: 14px;
 }
 #page-name{
   /* change identifier to class*/
@@ -69,6 +69,7 @@ header{
   color: #fff;
   padding: 2px;
   margin: 2px;
+  filter: invert(100%);
 }
 .shot-cont{
   float: right;
@@ -315,4 +316,6 @@ margin-bottom: 2px;
     height: 40px;
   }
 }
+
+
 

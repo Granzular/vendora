@@ -36,4 +36,24 @@
 				<input placeholder="search for a product" type="text" id="search-box">
 				<img id="search-icon" src="/media/images/icons/search.svg">
 			</div>
+			<section id="search-result-section-cont">
+        <div class="search-header">
+            
+      <h3>Search Results</h3>
+            <button id="close-search-btn"></button>
+        </div>
+            <div class="filter-cont">
+                <h5>filter by category</h5>
+            			
+            						<select id="filter">
+            									<option value="all">all</option>
+            									{% for category in categories %}
+            										<option value="{{category}}">{{category}}</option>
+            									{% endfor %}            									
+            						</select>
+            		
+            </div>
+						<hr>
+        <div id="search-result-section"></div>
+    </section>
 </header>

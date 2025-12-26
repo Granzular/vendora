@@ -1,0 +1,38 @@
+{% extends "myadmin/base.html" %}
+{% load static humanize %}
+{% block title %}products{% endblock title %}
+{% block styles %}
+<link rel="stylesheet" href="{% static 'myadmin/css/products.css' %}">
+{% endblock styles %}
+
+{% block content %}
+<main class="main">
+  <section class="top-section">
+    
+  </section>
+  
+  <section class="product-list">
+    {% if products %}
+    {% for product in products %}
+    <div class="product-section">
+      <div class="product-card">
+        <img src="{{product.image.url}}">
+        <div class="product-info">
+        <p>{{product.name}}</p>
+        <p>₦{{product.price|intcomma}}</p>
+          <a href="{{product.get_absolute_url}}">view</a>
+        </div>
+      </div>
+      <div class="cta">
+        <button class="btn edit-product-btn">edit product</button>
+        <button class="delete-product-btn btn">delete product</button>
+        
+      </div>
+    </div>
+    {% endfor %}
+    {% else %}
+    <div class="alert alert-warning"> No products</div>
+    {% endif %}
+  </section>
+</main>
+{% endblock content %}

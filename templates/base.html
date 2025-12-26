@@ -6,8 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="">
     <title>Vendora|{% block title %}{% endblock title %}</title>
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+  
     <link rel="icon" href="">
   <link rel="stylesheet" href="{% static 'css/utils.css' %}">
      <link rel="stylesheet" href="{% static 'css/navbar.css' %}">
@@ -26,21 +25,7 @@
     {% block nav %}
 	{% include 'navbar.html' %}
     {% endblock nav %}
-    <section id="search-result-section-cont">
-        <div class="search-header">
-            
-      <h3>Search Results</h3>
-            <button id="close-search-btn"></button><hr>
-        </div>
-            <div class="filter-cont">
-                <!-- Dynamically add filters in future updates-->
-                <h5>filter</h5>
-                <button class="filter-item">category</button>
-                 <button class="filter-item">click</button>
- 
-            </div>
-        <div id="search-result-section"></div>
-    </section>
+    
 	{% block content %}
 
 	{% endblock content %}
@@ -86,6 +71,5 @@ catch{}
   <script type="text/javascript" src="{% static 'js/search.js' %}"></script>
 	{% block scripts %}
 	{% endblock scripts %}
-   
 </html>
 

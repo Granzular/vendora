@@ -9,11 +9,32 @@ function registerEvents(e){
     searchBox.addEventListener("click",(e)=>{searchResultCont.style.display ="block";
         document.querySelector("#close-search-btn").addEventListener("click",(e)=>{searchResultCont.style.display="none";});
     });
-    searchIcon.addEventListener("click",function (e){
-        // start of anonymous function
+    searchIcon.addEventListener("click",handleSearch,false);
+    
+searchBox.addEventListener("keydown",(e)=>{
+    if (e.key == "Enter"){
+    handleSearch(e)}},false);
+    
+    function updateSearchBoxPlaceholder(index){
+        if (index>2){index=0}
+        let phraseList =["search for a product","search categories","find love"];
+        searchBox.setAttribute("placeholder",phraseList[index]);
+        return setTimeout(updateSearchBoxPlaceholder,4000,index+1)
+    }
+    updateSearchBoxPlaceholder(0)
+}
+
+
+function handleSearch (e){
+    // assign variables
+    const filterParam = document.querySelector("#filter").value;
+    const searchBox = document.querySelector("#search-box");
+    const searchResult = document.querySelector("#search-result-section");
+    const searchResultCont = document.querySelector("#search-result-section-cont");
+        // start of function
     const word = searchBox.value;
     // build url 
-    const url = `/products/search/?q=${word}`;
+    const url = `/products/search/?q=${word}&filter=${filterParam}`;
     // make request 
     fetch(url)
     .then(res=>res.json())
@@ -39,14 +60,5 @@ function registerEvents(e){
         return data;
     })
     .catch(err=>console.log(err))
-    } // end of anonymous function
-    ,false);// end of event listener
-    
-    function updateSearchBoxPlaceholder(index){
-        if (index>2){index=0}
-        let phraseList =["search for a product","search categories","find love"];
-        searchBox.setAttribute("placeholder",phraseList[index]);
-        return setTimeout(updateSearchBoxPlaceholder,4000,index+1)
-    }
-    updateSearchBoxPlaceholder(0)
-}
+    } // end of  function
+

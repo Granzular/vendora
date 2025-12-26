@@ -139,3 +139,15 @@ class Transaction(models.Model):
 
     class Meta:
         ordering = ["-created"]
+
+class Sales(models.Model):
+    """ The sales model represents the sale of a particular product and the quantity sold for a given order. it is structurally an order position of a successful order. why a seprate model then? For decoupling, clarity and clear business logic and semantics"""
+
+    customer = models.ForeignKey(Customer, on_delete=models.CASCADE)
+    order = models.ForeignKey(Order, on_delete=models.CASCADE)
+    product =  models.ForeignKey(Product, on_delete=models.CASCADE)
+    quantity = models.PositiveIntegerField()
+
+    created = models.DateTimeField(auto_now_add=True)
+
+ 

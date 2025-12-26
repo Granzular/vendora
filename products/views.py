@@ -35,6 +35,7 @@ def search_view(request):
     q = request.GET.get("q")
     filter_q = request.GET.get("filter")
     if filter_q:
+        print("FILTER "+filter_q)
         prod = get_products_by_category(filter_q)
         res = prod.filter(name__contains=q)
     else:

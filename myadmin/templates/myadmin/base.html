@@ -1,0 +1,40 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="CONTENT-TYPE" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  
+  <title>admin|{% block title %}{% endblock title %}</title>
+  <link rel="stylesheet" href="{% static 'myadmin/css/main.css' %}">
+<link rel="stylesheet" href="{% static 'myadmin/css/navbar.css' %}">
+  
+  {% block styles %}{% endblock styles %}
+ 
+</head>
+<body>
+  {% include "myadmin/navbar.html" %}
+  
+  {% block content %}
+  {% endblock content %}
+  
+   <footer>
+        <ul>
+            <li>twitter</li>
+            <li>facebook</li>
+            <li>amazon</li>
+        </ul>
+        <p class="copyrt">granzularcodex&copy;<span id="year"></span></p>
+        
+        <script type="text/javascript">
+let date = new Date();
+document.querySelector("#year").innerHTML = date.getFullYear();
+</script>
+    </footer>
+  
+</body>
+
+<script type="text/javascript" src="{% static 'js/navbar.js' %}"></script>
+{% block scripts %}{% endblock scripts %}
+   
+</html>

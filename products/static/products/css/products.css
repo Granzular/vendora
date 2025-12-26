@@ -34,22 +34,17 @@
   color: #333;
 }
 
-/* featured products rule, overrides some generic rules
-#featured .product-card{
-  width: 6em;
-  height: 8em;
-  border: groove 1px;
-  margin: 6px;
+.scroll-wrapper {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: 33.33%; /* ✅ 3 images per frame */
+  gap: 12px;
+
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  padding: 10px;
 }
 
-#featured .product-section{
-  box-sizing: border-box;
-  width: 100%;
-  margin: 0;
-  padding: 0;
-  border: solid red 1px;
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: center;
- }*/
+.scroll-wrapper .product-card {
+  scroll-snap-align: start;
+}

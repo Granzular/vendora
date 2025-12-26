@@ -1,0 +1,82 @@
+{% extends "myadmin/base.html" %}
+{% load static %}
+{% block title %}Dashboard{% endblock title %}
+{% block scripts %}
+<script type="application/javascript" src="{% static 'myadmin/js/apexcharts.min.js' %}"></script>
+
+<script type="application/javascript" src="{% static 'myadmin/js/chart.js' %}"></script>
+
+<script type="application/javascript" src="{% static 'myadmin/js/main.js' %}"></script>
+{% endblock scripts %}
+
+{% block styles %}
+  <link rel="stylesheet" href="{% static 'myadmin/css/dashboard.css' %}">
+{% endblock styles %}
+
+{% block content %}
+<!-- main content starts here-->
+<main class="main">
+  
+  <!-- metrics and charts -->
+  <section id="stats" class="section stats scroll-x">
+    
+    <div class="stat-item">
+      <div class="metrics">
+      <p class="title" >Customers</p>
+         <img class="icon" src="/media/images/icons/person-fill.svg">
+        <p class="count" id="total-customers-count">500</p>
+    </div>
+    </div>
+    
+    <div class="stat-item">
+      <div class="metrics">
+       <p class="title">Total Sales</p>
+        <img class="icon" src="/media/images/sales01.png">
+        <p class="count" id="total-sales-count">700</p>
+      </div>
+    </div>
+    
+    <div class="stat-item">
+      <div class="metrics">
+       <p class="title" >Total Revenue</p>
+        <img class="icon" src="/media/images/revenue01.png">
+        <p class="count" id="total-revenue-count scroll-x">₦500000</p>
+      </div>
+    </div>   
+  </section>
+  <!--chart-->
+  <div id="sales-chart" class="section chart"></div>
+  <!-- end of chart --> 
+  <!--this section holds major ctas Products, Inventory, Categories-->
+  <section class="main-section">
+  <section id="inventory" class="section inventory">
+    <div class="info">
+      <h3>Inventory</h3>
+    </div>
+    <div class="cta">
+      <button id="manage-inventory-btn" class="manage-btn" >manage</button>
+    </div>
+  </section>
+  
+  <section id="products" class="section products">
+    <div class="info">
+      <h3>Products</h3>
+    </div>
+    <div class="cta">
+      <button id="manage-product-btn" class="manage-btn">manage</button>
+    </div>
+  </section>
+  
+  <section id="categories" class="section categories">
+    <div class="info">
+      <h3>Categories</h3>
+    </div>
+    <div class="cta">
+      <button id="manage-category-btn" class="manage-btn">manage</button>
+    </div>
+  </section>
+    
+  </section>
+  
+</main>
+{% endblock content %}

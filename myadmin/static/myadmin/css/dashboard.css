@@ -1,0 +1,130 @@
+/* first section. analytics and metrics */
+.section{
+        display: grid;
+        width: 90%;
+        height: 20em;
+        margin: auto;
+        margin-bottom: 40px;
+        padding: 5px;
+        border-style: none;
+        border-radius: 5px;
+        
+}
+.stats{
+        height: 12em;
+        margin-top: 50px;
+        margin-bottom: 100px;
+        grid-auto-flow: column;
+        grid-auto-columns: 100%;
+        gap: 15px;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+}
+.stat-item{
+        display: grid;
+        grid-template-columns: 100%;
+        grid-template-rows: 100%;
+        gap:0;
+        border: solid 0.5px var(--color-primary-light);
+        border-left: solid 7px var(--color-primary-light);
+        border-radius: 10px;
+        scroll-snap-align: start;
+        background-color: #fff;
+        background-color: rgba(255,255,255,0.4);
+        backdrop-filter: blur(16px);
+}
+
+.metrics{
+        padding: 5px;
+}
+.metrics .title{
+        display: inline-block;
+        font-weight: 450;
+        font-size: 1.6em;
+        padding-left: 5px;
+        color: #555;
+}
+.metrics .icon{
+        display: inline-block;
+        width: 50px;
+        height: 50px;
+        margin-left: 10px;
+        padding: 0px;
+}
+.metrics .count{
+        font-weight: 500;
+        font-size: 2.8em;
+        text-align: center;
+        color: #222;
+}
+.scroll-x{
+        overflow-x: auto;
+        line-height: 0.8em;
+}
+.scroll-x::-webkit-scrollbar{
+        display: none;
+}
+.chart{
+        margin-bottom: 100px;
+}
+/* main sections */
+.main-section{
+        width: 100%;
+        display: grid;
+        grid-template-columns: 100%;
+}
+.main-section .section{
+        background-color: #fff;
+        height: 200px;
+        background-size: cover;
+        background-repeat: no-repeat;
+}
+.main-section .info,.main-section .cta{
+        backdrop-filter:blur(10px);
+}
+.inventory{
+        grid-template-columns: 100%;
+        grid-template-rows: 70% 30%;
+        background: url('/media/images/card-bg02.jpg');
+}
+
+.products{
+        grid-template-columns: 100%;
+        grid-template-rows: 70% 30%;
+        background: url('/media/images/card-bg02.jpg');
+        
+}
+.categories{
+        grid-template-columns: 100%;
+        grid-template-rows: 70% 30%;
+        background: url('/media/images/card-bg02.jpg');
+}
+
+.manage-btn{
+        width: 50%;
+        height: 3em;
+        font-weight: 450;
+        font-size: 16px;
+        border: solid 0.8px #222;
+        border-radius: 25px;
+        margin-left: 50%;
+        background: linear-gradient(135deg,var(--color-primary),var(--color-primary-light),var(--color-primary));
+        color: #fff;
+}
+
+.info h3{
+        text-align: center;
+        font-size: 30px;
+}
+/* desktop */
+@media screen and (min-width: 600px){
+        .stats{
+                grid-auto-columns: 33.33%;
+        }
+        .main-section{
+                grid-template-columns: repeat(3,1fr);
+                gap: 10;
+                padding: 5px;
+        }
+}
+

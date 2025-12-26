@@ -1,0 +1,30 @@
+<header>
+		<div class="cont" id="head">
+			<h1 id="brand-name"><a href="{% url 'myadmin:dashboard' %}">Vendora ADMIN</a></h1>
+<nav class="navbar">
+	<ul>
+				<li><a href="" class="nav-link">store</a></li>
+		<li><a href="/" class="nav-link" >site</a></li>
+				
+	</ul>
+			<div class="shot-cont">
+							 
+							<a href="{% url 'customers:profile' %}"
+										class="shot-link not">
+										<img class="shot" id="navbar-headshot"src="/media/images/icons/person.svg"><p class="notification-dot"></p></a>
+								<a href="{% url 'customers:notification_list' %}"
+										class="shot-link not">
+										<img class="shot" id="navbar-bell"src="/media/images/icons/bell.svg"><p class="notification-dot" id="bell-dot"></p></a>
+						
+					<img class="menuicon" id="menu-icon" src="/media/images/menuicon01.png">
+			</div>
+			</div>
+</nav>
+			{% if user.is_authenticated %}
+			
+			{% else %}
+						<div class="btn-cont">
+			<a class="btn btn-register" href="{% url 'customers:signup' %}">Register</a>|<a class="btn btn-login" href="{% url 'customers:login' %}">Login</a>
+										</div>
+			{% endif %}
+</header>

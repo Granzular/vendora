@@ -112,10 +112,10 @@ def checkout(request):
                 trans = create_transaction(order,reference)
                 return redirect(auth_url)
             else:
-                return HttpResponse("<h1> An Error Occurred. Try again or Conatct Support"+str(res),status=500)
+                return render(request,"orders/payment_response.html",{"message":"An error occured"})
 
         else:
-            return HttpResponse("<h1>NOT OK</h1>",status=400)
+            return render(request,"orders/payment_response.html",{"message":"Invalid Form data. "})
 
 @login_required
 def retry_payment(request):
@@ -127,7 +127,7 @@ def verify_payment(request):
         reference = request.GET.get("reference")
         trans = Transaction.objects.filter(reference=reference)
         trans = trans[0] if len(trans)>0 else None
-        order = trans.order
+        order = trans.order if trans!= None else None
 
         if trans and order:
             paycl = PaystackClient()
@@ -144,10 +144,10 @@ def verify_payment(request):
                 context = {"message":"Payment Declined. You can Retry"}
                 return render(request,"orders/payment_response.html")
             else:
-                return HttpResponse(f"<h1>Unknown Response{rstatus}",status=400)
+                return render(request,"orders/payment_response.html",{"message":f"Error occurred: unknown Response: {rstatus}"})
 
         else:
-            return HttpResponse("<h1>Reference Mismatch. Contact support</h1>")
+            return render(request,"orders/payment_response.html",{"message":"Transaction reference mismatch"})
 
 @csrf_exempt
 def paystack_webhook(request):

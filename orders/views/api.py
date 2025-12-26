@@ -52,7 +52,7 @@ class CartView(APIView):
 
 
 # BULK OPERATIONS BELOW
-
+@login_required
 @api_view(['POST'])
 @transaction.atomic
 def bulk_create_cart(request):
@@ -73,7 +73,7 @@ request.user))
     return Response(serializer.data, status=status.HTTP_201_CREATED)
 
 
-
+@login_required
 @api_view(['PUT', 'PATCH'])
 @transaction.atomic
 def bulk_update_cart(request):
@@ -105,7 +105,7 @@ def bulk_update_cart(request):
     return Response(updated_items, status=status.HTTP_200_OK)
 
 
-
+@login_required
 @api_view(['DELETE'])
 @transaction.atomic
 def bulk_delete_cart(request):

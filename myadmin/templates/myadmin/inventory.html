@@ -1,0 +1,35 @@
+{% extends "myadmin/base.html" %}
+{% load static humanize %}
+{% block title %}products{% endblock title %}
+{% block styles %}
+{% endblock styles %}
+
+{% block content %}
+<main class="main">
+  <section class="top">
+    
+  </section>
+  
+  <section class="product-list">
+    {% if products %}
+    {% for product in products %}
+    <div class="product-section">
+      <div class="product-card">
+        <img src="{{product.image.url}}">
+        <p>{{product.name}}</p>
+        <p>{{product.price|intcomma}}</p>
+        
+      </div>
+      <div class="cta">
+        <button>edit product</button>
+        <button>delete product</button>
+        
+      </div>
+    </div>
+    {% endfor %}
+    {% else %}
+    <div class="alert alert-warning"> No products</div>
+    {% endif %}
+  </section>
+</main>
+{% endblock content %}

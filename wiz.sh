@@ -1,1 +1,1 @@
-python manage.py runserver --settings=mysite.settings.development
+python manage.py runserver 8080 --settings=mysite.settings.development 

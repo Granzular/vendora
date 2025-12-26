@@ -1,3 +1,4 @@
+
 :root {
         --font-heading: 'Inter', sans-serif;
         --font-body: 'Montserrat', sans-serif;
@@ -21,11 +22,11 @@
       }
 
 body{
-  font-family: "Helvetica"  var(--font-body);
-  margin: 0px;
-  padding: 0px;
-  line-height: 1.6em;
-        background-color: var(--color-neutral-light);
+        font-family: "Helvetica"  var(--font-body);
+        margin: 0px;
+        padding: 0px;
+        line-height: 1.6em;
+        background-color: rgb(245,245,255);
         color: var(--color-neutral-dark);
 }
 h2, h3, h4, h5, h6 {
@@ -33,34 +34,7 @@ h2, h3, h4, h5, h6 {
   font-weight: 600;
         color: var(--color-primary-dark);
       }
-.button-primary {
-  background: var(--gradient-primary);
-  color: var(--color-neutral-light);
-  padding: 12px 24px;
-  border: none;
-  border-radius: 6px;
-  font-weight: bold;
-  cursor: pointer;
-  transition: background 0.3s ease;
-}
-
-.button-primary:hover {
-  background: linear-gradient(135deg, var(--color-primary-light), var(--color-primary));
-}
-
-.button-accent {
-  background: var(--gradient-accent);
-  color: var(--color-neutral-light);
-  padding: 12px 24px;
-  border: none;
-  border-radius: 6px;
-  font-weight: bold;
-  cursor: pointer;
-  transition: background 0.3s ease;
-}
-
-.button-accent:hover {
-  background: linear-gradient(135deg, var(--color-accent-teal), var(--color-primary));
+ primary));
 }
 
 /* Links */
@@ -73,38 +47,6 @@ a:hover {
   color: var(--color-primary-light);
 }
 
-/* Cards / Containers */
-.card {
-  background-color: var(--color-neutral-light);
-  border: 1px solid var(--color-neutral-medium);
-  border-radius: 8px;
-  padding: 20px;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-}
-
-/* Hero Section */
-.hero {
-  background: var(--gradient-primary);
-  color: var(--color-neutral-light);
-  padding: 80px 20px;
-  text-align: center;
-}
-
-.container{
-  width: 90%;
-  margin: auto;
-  overflow: hidden;
-  border: solid 1px #fff;
-}
-#search-results-section{
-  width: 80%;
-  margin: auto;
-}
-.search-result{
-  width:80%;
-  margin: auto;
-  border-radius: 5px;
-}
 .alert{
         display: block;
         width: 80%;
@@ -156,8 +98,8 @@ a:hover {
 }
 
 main{
-  margin: 10px;
-  padding-top: 30vh;
+  margin: 0px;
+  padding-top: 15%;
 }
 footer{
   width: 100%;
@@ -180,8 +122,3 @@ footer ul{
   font-family: var(--font-body);
   font-weight: 300;
 }
-
-.btn, .nav-link, button{
-  font-family: var(--font-heading);
-  font-weight: 500;
-      }

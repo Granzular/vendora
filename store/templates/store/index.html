@@ -10,7 +10,7 @@
 {% block content %}
 <main>
 	<h2>Featured Products</h2>
-	<section class="product-section" id="featured">
+	<section class="product-section scroll-wrapper" id="featured">
 {% if featured %}
 {% for product in featured %}
 	             <a href="{{product.get_absolute_url}}" class="product-link">  
